@@ -1,4 +1,5 @@
 #include <iostream>
+
 using namespace std;
 
 void firstTree(int size) {
@@ -14,11 +15,11 @@ void firstTree(int size) {
 
 		cout << endl;
 		row++;
-	}	
+	}
 }
 
 void secondTree(int size) {
-	int row = size;	
+	int row = size;
 
 	while (row >= 1) {
 		int column = row;
@@ -45,7 +46,7 @@ void thirdTree(int size) {
 			} else {
 				cout << "  ";
 			}
-	
+
 			column--;
 		}
 
@@ -66,7 +67,7 @@ void fourthTree(int size) {
 			} else {
 				cout << "  ";
 			}
-	
+
 			column--;
 		}
 
@@ -87,7 +88,7 @@ void pyramid(int size) {
 			} else {
 				cout << " ";
 			}
-	
+
 			column--;
 		}
 
@@ -108,7 +109,7 @@ void reversedPyramid(int size) {
 			} else {
 				cout << " ";
 			}
-	
+
 			column--;
 		}
 
@@ -143,4 +144,3 @@ int main() {
 
 	return 0;
 }
-

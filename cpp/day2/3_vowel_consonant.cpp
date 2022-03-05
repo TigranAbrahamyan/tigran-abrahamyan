@@ -1,13 +1,32 @@
 #include <iostream>
+
 using namespace std;
 
-int main() {
-	char character;
-	
-	cout << "Input a character: ";
-	cin >> character;
+bool isCharLower(char ch) {
+  return ch >= 'a' && ch <= 'z';
+}
 
-	switch (character) {
+bool isCharUpper(char ch) {
+  return ch >= 'A' && ch <= 'Z';
+}
+
+int main() {
+  char ch;
+
+  cout << "Input a character: ";
+  cin >> ch;
+
+  while (true) {
+    if (isCharLower(ch) || isCharUpper(ch)) {
+      break;
+    }
+
+		cout << "Invalid character, input again: ";
+    cin.ignore(1000, '\n');
+		cin >> ch;
+  }
+
+	switch (ch) {
 		case 'a':
 		case 'A':
 		case 'e':
@@ -18,13 +37,12 @@ int main() {
 		case 'I':
 		case 'o':
 		case 'O':
-			cout << "'" << character << "' is vowel" << endl;
+			cout << "'" << ch << "' is vowel" << endl;
 			break;
 		default:
-			cout << "'" << character << "' is consonant" << endl;
+			cout << "'" << ch << "' is consonant" << endl;
 			break;
 	}
 
 	return 0;
 }
-

@@ -1,4 +1,5 @@
 #include <iostream>
+
 using namespace std;
 
 int main() {
@@ -9,40 +10,22 @@ int main() {
 
 	switch (monthNumber) {
 		case 1:
-			cout << "Total number of days = 31" << endl;
-			break;
-		case 2:
-			cout << "Total number of days = 28" << endl;
-			break;
-		case 3:
+    case 3:
+    case 5:
+    case 7:
+    case 8:
+    case 10:
+    case 12:
 			cout << "Total number of days = 31" << endl;
 			break;
 		case 4:
+    case 6:
+    case 9:
+    case 11:
 			cout << "Total number of days = 30" << endl;
 			break;
-		case 5:
-			cout << "Total number of days = 31" << endl;
-			break;
-		case 6:
-			cout << "Total number of days = 30" << endl;
-			break;
-		case 7:
-			cout << "Total number of days = 31" << endl;
-			break;
-		case 8:
-			cout << "Total number of days = 31" << endl;
-			break;
-		case 9:
-			cout << "Total number of days = 30" << endl;
-			break;
-		case 10:
-			cout << "Total number of days = 31" << endl;
-			break;
-		case 11:
-			cout << "Total number of days = 30" << endl;
-			break;
-		case 12:
-			cout << "Total number of days = 31" << endl;
+    case 2:
+			cout << "Total number of days = 28" << endl;
 			break;
 		default:
 			cout << "Month not found" << endl;
@@ -51,4 +34,3 @@ int main() {
 
 	return 0;
 }
-
