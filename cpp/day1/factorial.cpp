@@ -7,7 +7,7 @@ int main() {
   cout << "Write a number: ";
   cin >> number;
 
-  while (number <= 0) {
+  while (number != 0) {
     result = result * number;
     number--;
   }
