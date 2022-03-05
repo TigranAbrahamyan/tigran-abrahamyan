@@ -3,6 +3,7 @@ using namespace std;
 
 int main() {
 	int week = 0;
+
 	cout << "Input a week number: ";
 	cin >> week;
 
@@ -17,7 +18,7 @@ int main() {
 			cout << "Wednesday" << endl;
 			break;
 		case 4:
-			cout << "Thirsday" << endl;
+			cout << "Thursday" << endl;
 			break;
 		case 5:
 			cout << "Friday" << endl;
@@ -33,6 +34,6 @@ int main() {
 			break;
 	}
 
-	cout << endl;
+	return 0;
 }
 

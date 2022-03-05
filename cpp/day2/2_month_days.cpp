@@ -3,6 +3,7 @@ using namespace std;
 
 int main() {
 	int monthNumber = 0;
+
 	cout << "Input a month number: ";
 	cin >> monthNumber;
 

@@ -2,12 +2,11 @@
 using namespace std;
 
 int main() {
-	int firstNumber = 0;
-	int secondNumber = 0;
-	string arithmeticOperator;
-	int operatorIndex = 0;
-	int result = 0;
-
+	double firstNumber = 0;
+	double secondNumber = 0;
+	double result = 0;
+	char arithmeticOperator;
+	
 	cout << "Input a first number: ";
 	cin >> firstNumber;
 	cout << "Input a operator: ";
@@ -15,36 +14,26 @@ int main() {
 	cout << "Input a second number: ";
 	cin >> secondNumber;
 
-	if (arithmeticOperator == "+") {
-		operatorIndex = 1;
-	} else if (arithmeticOperator == "-") {
-		operatorIndex = 2;
-	} else if (arithmeticOperator == "*") {
-		operatorIndex = 3;
-	} else if (arithmeticOperator == "/") {
-		operatorIndex = 4;
-	}
-
-	switch (operatorIndex) {
-		case 1:
+	switch (arithmeticOperator) {
+		case '+':
 			result = firstNumber + secondNumber;
-			cout << firstNumber << " + " << secondNumber << " = " << result << endl;
 			break;
-		case 2:
+		case '-':
 			result = firstNumber - secondNumber;
-			cout << firstNumber << " - " << secondNumber << " = " << result << endl;
 			break;
-		case 3:
+		case '*':
 			result = firstNumber * secondNumber;
-			cout << firstNumber << " * " << secondNumber << " = " << result << endl;
 			break;
-		case 4:
+		case '/':
 			result = firstNumber / secondNumber;
-			cout << firstNumber << " / " << secondNumber << " = " << result << endl;
 			break;
 		default:
 			cout << "Operator not found" << endl;
-			break;
+			return 0;
 	}
+
+	cout << firstNumber << " " << arithmeticOperator << " " << secondNumber << " = " << result << endl;
+
+	return 0;
 }
 
