@@ -2,11 +2,19 @@
 
 using namespace std;
 
-int allAnimalsLegsCount() {
-  int chickenLegs = 2;
-  int cowLegs = 4;
-  int pigLegs = 4;
+int getChickenLegsCount(int chickens) {
+  return chickens * 2;
+}
 
+int getCowLegsCount(int cow) {
+  return cow * 4;
+}
+
+int getPigLegsCount(int pig) {
+  return pig * 4;
+}
+
+int main() {
   int chickens = 0;
   int cows = 0;
   int pigs = 0;
@@ -19,12 +27,8 @@ int allAnimalsLegsCount() {
   cout << "Pigs: ";
   cin >> pigs;
 
-  return (chickens * chickenLegs) + (cows * cowLegs) + (pigs * pigLegs);;
-}
-
-int main() {
-  int animalLegsCount = allAnimalsLegsCount();
-  cout << animalLegsCount << endl;
+  int totalLegs = getChickenLegsCount(chickens) + getCowLegsCount(cows) + getPigLegsCount(pigs);
+  cout << totalLegs << endl;
 
   return 0;
 }

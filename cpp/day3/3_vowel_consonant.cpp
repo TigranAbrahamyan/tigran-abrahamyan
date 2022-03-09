@@ -11,11 +11,31 @@ bool isCharUpper(char ch) {
 }
 
 bool isAlpha(char ch) {
-	return isCharLower(ch) || isCharUpper(ch);
+  return isCharLower(ch) || isCharUpper(ch);
 }
 
-char myCharacter() {
-	char ch;
+void checkCharVowelConsonant(char ch) {
+  switch (ch) {
+    case 'a':
+    case 'A':
+    case 'e':
+    case 'E':
+    case 'u':
+    case 'U':
+    case 'i':
+    case 'I':
+    case 'o':
+    case 'O':
+      cout << "'" << ch << "' is vowel";
+      break;
+    default:
+      cout << "'" << ch << "' is consonant";
+      break;
+  }
+}
+
+int main() {
+  char ch;
 
   cout << "Input a character: ";
   cin >> ch;
@@ -25,34 +45,13 @@ char myCharacter() {
       break;
     }
 
-		cout << "Invalid character, input again: ";
+    cout << "Invalid character, input again: ";
     cin.ignore(1000, '\n');
-		cin >> ch;
+    cin >> ch;
   }
 
-	return ch;
-}
+  checkCharVowelConsonant(ch);
+  cout << endl;
 
-int main() {
-  char ch = myCharacter();
-
-	switch (ch) {
-		case 'a':
-		case 'A':
-		case 'e':
-		case 'E':
-		case 'u':
-		case 'U':
-		case 'i':
-		case 'I':
-		case 'o':
-		case 'O':
-			cout << "'" << ch << "' is vowel" << endl;
-			break;
-		default:
-			cout << "'" << ch << "' is consonant" << endl;
-			break;
-	}
-
-	return 0;
+  return 0;
 }

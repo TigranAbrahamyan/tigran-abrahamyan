@@ -2,46 +2,42 @@
 
 using namespace std;
 
-string findWeek() {
-	int week = 0;
-	string result = "";
-
-	cout << "Input a week number: ";
-	cin >> week;
-
-	switch (week) {
-		case 1:
-			result = "Monday";
-			break;
-		case 2:
-			result = "Tuesday";
-			break;
-		case 3:
-			result = "Wednesday";
-			break;
-		case 4:
-			result = "Thursday";
-			break;
-		case 5:
-			result = "Friday";
-			break;
-		case 6:
-			result = "Saturday";
-			break;
-		case 7:
-			result = "Sunday";
-			break;
-		default:
-			result = "Week not found";
-			break;
-	}
-
-	return result;
+void findWeek(int week) {
+  switch (week) {
+    case 1:
+      cout << "Monday";
+      break;
+    case 2:
+      cout << "Tuesday";
+      break;
+    case 3:
+      cout << "Wednesday";
+      break;
+    case 4:
+      cout << "Thursday";
+      break;
+    case 5:
+      cout << "Friday";
+      break;
+    case 6:
+      cout << "Saturday";
+      break;
+    case 7:
+      cout << "Sunday";
+      break;
+    default:
+      cout << "Week not found";
+      break;
+  }
 }
 
 int main() {
-	string week = findWeek();
-	cout << week << endl;
+  int week = 0;
+  cout << "Input a week number: ";
+  cin >> week;
 
-	return 0;
+  findWeek(week);
+  cout << endl;
+
+  return 0;
 }
