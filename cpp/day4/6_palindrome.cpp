@@ -19,7 +19,6 @@ string checkPalindrome(string word) {
     reversedWord = word[i] + reversedWord;
   }
 
-
   return word == reversedWord ? "Word is a palindrome" : "Word is not a palindrome";
 }
 
