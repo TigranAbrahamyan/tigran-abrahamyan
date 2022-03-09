@@ -11,13 +11,13 @@ void decimalToBinary(int n) {
   }
 }
 
-// void decimalToBinaryRecursion(int n) {
+// void decimalToBinaryRecursive(int n) {
 //   if (n < 1) {
 //     return;
 //   }
 
 //   cout << n % 2;
-//   decimalToBinaryRecursion(n / 2);
+//   decimalToBinaryRecursive(n / 2);
 // }
 
 int main() {

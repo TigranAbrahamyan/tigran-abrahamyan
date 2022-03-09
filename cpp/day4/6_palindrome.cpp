@@ -13,7 +13,7 @@ string checkPalindrome(string word) {
 
   for (int i = 0; word[i] != '\0'; i++) {
     if (isCharUpper(word[i])) {
-      word[i] = word[i] + charDifference;
+      word[i] += charDifference;
     }
 
     reversedWord = word[i] + reversedWord;

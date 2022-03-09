@@ -31,23 +31,14 @@ void generateArray(
   }
 }
 
-void sortArray(int arraySize, double array[]) {
-  for (int i = 0; i < arraySize; i++) {
-    int indexOfMin = i;
-    for (int j = i + 1; j < arraySize; j++) {
-      if (array[j] < array[indexOfMin]) {
-        indexOfMin = j;
-      }
-    }
-
-    double temp = array[i];
-    array[i] = array[indexOfMin];
-    array[indexOfMin] = temp;
+void reverseArray(int arraySize, double array[], double reversedArray[]) {
+  for (int j = arraySize; j > 0; j--) {
+    reversedArray[arraySize - j] = array[j - 1];
   }
 }
 
 void printArray(int arraySize, double array[]) {
-  cout << "Sorted array: ";
+  cout << "Reversed array: ";
 
   for (int i = 0; i < arraySize; i++) {
     cout << array[i];
@@ -79,12 +70,13 @@ int main() {
   cout << "==================================" << endl;
 
   double array[arraySize];
+  double reversedArray[arraySize];
 
   generateArray(minNumberInRange, maxNumberInRange, arraySize, array);
   cout << endl;
 
-  sortArray(arraySize, array);
-  printArray(arraySize, array);
+  reverseArray(arraySize, array, reversedArray);
+  printArray(arraySize, reversedArray);
   cout << endl;
 
   return 0;
