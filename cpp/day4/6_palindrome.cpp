@@ -7,7 +7,7 @@ bool isCharUpper(char ch) {
   return ch >= 'A' && ch <= 'Z';
 }
 
-void checkPalindrome(string word) {
+string checkPalindrome(string word) {
   string reversedWord = "";
   char charDifference = 'a' - 'A';
 
@@ -19,11 +19,8 @@ void checkPalindrome(string word) {
     reversedWord = word[i] + reversedWord;
   }
 
-  if (word == reversedWord) {
-    cout << "Word is a palindrome";
-  } else {
-    cout << "Word is not a palindrome";
-  }
+
+  return word == reversedWord ? "Word is a palindrome" : "Word is not a palindrome";
 }
 
 int main() {
@@ -31,8 +28,7 @@ int main() {
   cout << "Write a word: ";
   cin >> word;
 
-  checkPalindrome(word);
-  cout << endl;
+  cout << checkPalindrome(word) << endl;
 
   return 0;
 }
