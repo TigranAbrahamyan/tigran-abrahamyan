@@ -1,23 +1,27 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
 void decimalToBinary(int n) {
   int num = n;
+  string binaries;
 
   while (num >= 1) {
-    cout << num % 2;
+    binaries = (num % 2 == 0 ? "0" : "1") + binaries;
     num = num / 2;
   }
+
+  cout << binaries;
 }
 
-// void decimalToBinaryRecursive(int n) {
+// void decimalToBinaryRecursive(int n, string binaries = "") {
 //   if (n < 1) {
 //     return;
 //   }
 
-//   cout << n % 2;
-//   decimalToBinaryRecursive(n / 2);
+//   decimalToBinaryRecursive(n / 2, (n % 2 == 0 ? "0" : "1") + binaries);
+//   cout << binaries;
 // }
 
 int main() {

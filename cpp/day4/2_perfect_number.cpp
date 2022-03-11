@@ -6,7 +6,7 @@ using namespace std;
   perfect number - if sum of number divisors equal to number it is a perfect number
 **/
 
-string isNumberPerfect(int n) {
+bool isNumberPerfect(int n) {
   int sum = 0;
 
   for (int i = 1; i < n; i++) {
@@ -15,7 +15,7 @@ string isNumberPerfect(int n) {
     }
   }
 
-  return sum == n ? "Number is perfect" : "Number is not perfect";
+  return sum == n;
 }
 
 int main() {
@@ -29,7 +29,13 @@ int main() {
     cin >> n;
   }
 
-  cout << isNumberPerfect(n) << endl;
+  if (isNumberPerfect(n)) {
+    cout << "Number is perfect";
+  } else {
+    cout << "Number is not perfect";
+  }
+
+  cout << endl;
 
   return 0;
 }

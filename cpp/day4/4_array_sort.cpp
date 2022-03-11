@@ -11,15 +11,9 @@ void generateArray(
   int arraySize,
   double array[]
 ) {
-  int rangeDiff = (maxNumberInRange + 1) - minNumberInRange;
-  int currentTime = time(0);
-  srand(currentTime);
-
-  cout << "Array: ";
-
   for (int i = 0; i < arraySize; i++) {
-    double randomNumber = (double)rand() / RAND_MAX; // generate random numbers between 0 to 1
-    double randomNumberInRange = (randomNumber * rangeDiff) + minNumberInRange;
+    double randomNumber = rand() / (RAND_MAX + 0.0); // generate random numbers between 0 to 1
+    double randomNumberInRange = (randomNumber * (maxNumberInRange - minNumberInRange)) + minNumberInRange;
     double fixedTwoDecimalPlaces = round(randomNumberInRange * 100) / 100;
 
     array[i] = fixedTwoDecimalPlaces;
@@ -47,8 +41,6 @@ void sortArray(int arraySize, double array[]) {
 }
 
 void printArray(int arraySize, double array[]) {
-  cout << "Sorted array: ";
-
   for (int i = 0; i < arraySize; i++) {
     cout << array[i];
     if (i != arraySize - 1) {
@@ -58,6 +50,9 @@ void printArray(int arraySize, double array[]) {
 }
 
 int main() {
+  const int currentTime = time(0);
+  srand(currentTime);
+
   int minNumberInRange;
   int maxNumberInRange;
   int arraySize;
@@ -80,10 +75,13 @@ int main() {
 
   double array[arraySize];
 
+  cout << "Array: ";
   generateArray(minNumberInRange, maxNumberInRange, arraySize, array);
   cout << endl;
 
   sortArray(arraySize, array);
+
+  cout << "Sorted array: ";
   printArray(arraySize, array);
   cout << endl;
 
