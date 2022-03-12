@@ -11,20 +11,12 @@ int main() {
 
   const int m = 3;
   const int n = 3;
-  char arr[m][n] = {};
-
-  const char firstUpper = 'A';
-  const char firstLower = 'a';
-  const char alphabetLength = 'Z' - firstUpper;
+  int arr[m][n] = {};
 
   cout << "Array" << endl;
   for (int i = 0; i < m; i++) {
     for (int j = 0; j < n; j++) {
-      if (rand() % 2 == 0) {
-        arr[i][j] = (rand() % alphabetLength) + firstUpper;
-      } else {
-        arr[i][j] = (rand() % alphabetLength) + firstLower;
-      }
+      arr[i][j] = rand() % 10;
       cout << arr[i][j] << " ";
     }
 
@@ -32,24 +24,25 @@ int main() {
   }
 
   for (int i = 0; i < m; i++) {
-    char rowMinChar = arr[i][0];
-    char rowMaxChar = arr[i][0];
+    int rowMinNumber = arr[i][0];
+    int rowMaxNumber = arr[i][0];
     int rowMinIndex = i;
     int rowMaxIndex = i;
 
     for (int j = 0; j < n; j++) {
-      if (rowMinChar <= arr[i][j]) {
-        rowMinChar = arr[i][j];
+      if (rowMinNumber <= arr[i][j]) {
+        rowMinNumber = arr[i][j];
         rowMinIndex = j;
       }
-      if (rowMaxChar >= arr[i][j]) {
-        rowMaxChar = arr[i][j];
+
+      if (rowMaxNumber >= arr[i][j]) {
+        rowMaxNumber = arr[i][j];
         rowMaxIndex = j;
       }
     }
 
-    arr[i][rowMinIndex] = rowMaxChar;
-    arr[i][rowMaxIndex] = rowMinChar;
+    arr[i][rowMinIndex] = rowMaxNumber;
+    arr[i][rowMaxIndex] = rowMinNumber;
   }
 
   cout << endl;
