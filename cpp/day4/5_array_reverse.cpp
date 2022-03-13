@@ -15,13 +15,7 @@ void generateArray(
     double randomNumber = rand() / (RAND_MAX + 0.0); // generate random numbers between 0 to 1
     double randomNumberInRange = (randomNumber * (maxNumberInRange - minNumberInRange)) + minNumberInRange;
     double fixedTwoDecimalPlaces = round(randomNumberInRange * 100) / 100;
-
     array[i] = fixedTwoDecimalPlaces;
-
-    cout << array[i];
-    if (i != arraySize - 1) {
-      cout << ", ";
-    }
   }
 }
 
@@ -67,8 +61,10 @@ int main() {
   double array[arraySize];
   double reversedArray[arraySize];
 
-  cout << "Array: ";
   generateArray(minNumberInRange, maxNumberInRange, arraySize, array);
+
+  cout << "Array: ";
+  printArray(arraySize, reversedArray)
   cout << endl;
 
   reverseArray(arraySize, array, reversedArray);

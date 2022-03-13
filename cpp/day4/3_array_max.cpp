@@ -74,7 +74,6 @@ int main() {
   cout << endl;
 
   getArrayMaxMinNumber(arraySize, array);
-  cout << endl;
 
   return 0;
 }

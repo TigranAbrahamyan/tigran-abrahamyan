@@ -35,7 +35,5 @@ int main() {
     cout << "Number is not perfect";
   }
 
-  cout << endl;
-
   return 0;
 }

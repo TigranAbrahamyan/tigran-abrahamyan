@@ -34,7 +34,5 @@ int main() {
     cout << "Word is not a palindrome";
   }
 
-  cout << endl;
-
   return 0;
 }

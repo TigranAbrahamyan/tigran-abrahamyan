@@ -36,7 +36,6 @@ int main() {
   }
 
   decimalToBinary(n);
-  cout << endl;
 
   return 0;
 }
