@@ -13,7 +13,7 @@ int main() {
   int numberTwo = 1;
 
   while (arrayElements != arraySize) {
-    int sum = (numberOne * numberOne) + (numberTwo * numberTwo);
+    const int sum = (numberOne * numberOne) + (numberTwo * numberTwo);
 
     if (sum % 5 == 0) {
       // check for uniqueness
@@ -30,7 +30,7 @@ int main() {
 
       // then add element to array if it unique
       if (shouldAddElemntToArray) {
-        cout << numberOne * numberOne << "+" << numberTwo * numberTwo << "=" << sum << endl;
+        cout << numberOne * numberOne << " + " << numberTwo * numberTwo << " = " << sum << endl;
         array[arrayElements] = sum;
         arrayElements++;
       }

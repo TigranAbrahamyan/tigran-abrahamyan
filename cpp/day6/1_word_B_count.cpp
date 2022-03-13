@@ -24,7 +24,7 @@ int main() {
     }
   }
 
-  cout << "Words count that contains two B letter: " << result << endl;
+  cout << "Words count that contains two B letter: " << result;
 
   return 0;
 }

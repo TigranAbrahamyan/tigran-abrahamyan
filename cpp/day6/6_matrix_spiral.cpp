@@ -2,11 +2,13 @@
 
 using namespace std;
 
-int main() {
-  const int min = 1;
-  const int max = 9;
+int digitCount(int n);
+void printSpace(int n);
 
-  const int size = 3;
+int main() {
+  const int size = 12;
+  const int spiralMaxDigitLength = digitCount(size * size);
+
   int arr[size][size] = {};
 
   int counter = 1;
@@ -43,6 +45,7 @@ int main() {
 
   for (int i = 0; i < size; i++) {
     for (int j = 0; j < size; j++) {
+      printSpace(spiralMaxDigitLength - digitCount(arr[i][j]));
       cout << arr[i][j] << " ";
     }
 
@@ -50,4 +53,14 @@ int main() {
   }
 
   return 0;
+}
+
+int digitCount(int n) {
+  return n >= 10 ? digitCount(n / 10) + 1 : 1;
+}
+
+void printSpace(int n) {
+  while (n--) {
+    cout << " ";
+  }
 }

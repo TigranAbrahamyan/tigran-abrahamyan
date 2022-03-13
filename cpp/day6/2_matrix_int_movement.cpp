@@ -6,8 +6,6 @@ using namespace std;
 
 int main() {
   srand(time(0));
-  const int min = 1;
-  const int max = 9;
 
   const int m = 3;
   const int n = 3;
