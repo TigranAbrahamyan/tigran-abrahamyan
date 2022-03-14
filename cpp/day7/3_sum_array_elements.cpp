@@ -16,7 +16,11 @@ int main() {
 }
 
 void sumArray(int size, int *arr, int *result) {
-  for (int i = 0; i < size; i++) {
-    *result += *(arr++);
+  int *start = arr;
+  int *end = arr + size - 1;
+
+  while (start <= end) {
+    *result += *start;
+    start++;
   }
 }
