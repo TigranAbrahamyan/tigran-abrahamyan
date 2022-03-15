@@ -15,6 +15,9 @@ int main() {
   cout << "(240 350 460): " << atoi("240 350 460") << endl;     // 240
   cout << "(aa55bb): " << atoi("aa55bb") << endl;               // 0
   cout << "(5a6): " << atoi("5a6") << endl;                     // 5
+  cout << "(-54): " << atoi("-54") << endl;                     // -54
+  cout << "(-9 32): " << atoi("-9 32") << endl;                 // -9
+  cout << "(-9 aa 32): " << atoi("-9 aa 32") << endl;           // -9
   cout << "====================" << endl;
   cout << "my atoi" << endl;
   cout << "(200): " << myatoi("200") << endl;                   // 200
@@ -26,6 +29,9 @@ int main() {
   cout << "(240 350 460): " << myatoi("240 350 460") << endl;   // 240
   cout << "(aa55bb): " << myatoi("aa55bb") << endl;             // 0
   cout << "(5a6): " << myatoi("5a6") << endl;                   // 5
+  cout << "(-54): " << myatoi("-54") << endl;                   // -45
+  cout << "(-9 32): " << myatoi("-9 32") << endl;               // -9
+  cout << "(-9 aa 32): " << myatoi("-9 aa 32") << endl;         // -9
   cout << "====================" << endl;
 
   return 0;
