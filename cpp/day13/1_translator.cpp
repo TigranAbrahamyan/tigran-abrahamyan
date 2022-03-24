@@ -1,10 +1,59 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <clocale>
 
 #include "../lib/alphabet/alphabet.h"
 
 using namespace std;
+
+bool isWordEnglish(string);
+bool filterFileWordSigns(char);
+void translatedSentenceResult(string);
+string findAndGetFileLine(ifstream&, string&, string);
+string translatedWord(string, string);
+
+int main() {
+  setlocale(LC_ALL, "");
+
+  string sentence = "";
+  cout << "Input: ";
+  getline(cin, sentence);
+
+  ifstream translatorFile;
+
+  string translatedSentence = "";
+  string sentenceWord = "";
+  string fileWord = "";
+
+  for (int i = 0; i <= sentence.length(); i++) {
+    if (sentence[i] == ' ' || i == sentence.length() && sentenceWord != "") {
+      if (isWordEnglish(sentenceWord)) {
+        translatorFile.open("en-hy.txt");
+      } else {
+        translatorFile.open("hy-en.txt");
+      }
+
+      string currentFileWord = findAndGetFileLine(translatorFile, fileWord, sentenceWord);
+
+      if (currentFileWord != "" && currentFileWord == sentenceWord) {
+        translatedSentence += translatedWord(fileWord, sentenceWord) + " ";
+      } else {
+        translatedSentence += sentenceWord + " ";
+      }
+
+      translatorFile.close();
+      sentenceWord = "";
+      continue;
+    }
+
+    sentenceWord += sentence[i];
+  }
+
+  translatedSentenceResult(translatedSentence);
+
+  return 0;
+}
 
 bool isWordEnglish(string str) {
   for (int i = 0; str[i] != '\0'; i++) {
@@ -17,67 +66,43 @@ bool isWordEnglish(string str) {
 }
 
 bool filterFileWordSigns(char ch) {
-  return ch != '-' && ch != '>' && ch != ' ';
+  return ch != '-' && ch != '>' && ch != ' ' && ch != '\r';
 }
 
-int main() {
-  setlocale(LC_ALL, "");
+void translatedSentenceResult(string translatedSentence) {
+  ofstream translationResultFile("translation-result.txt");
+  translationResultFile << translatedSentence;
+  translationResultFile.close();
+}
 
-  string sentence = "";
-  cout << "Input : ";
-  getline(cin, sentence);
+string findAndGetFileLine(ifstream &translatorFile, string &fileWord, string sentenceWord) {
+  string result = "";
 
-  ifstream translatorFile;
-  string sentenceWord = "";
-  string fileWord = "";
+  while (getline(translatorFile, fileWord)) {
+    result = "";
 
-  cout << "Output: ";
-
-  for (int i = 0; i <= sentence.length(); i++) {
-    if (sentence[i] == ' ' || i == sentence.length() && sentenceWord != "") {
-      string currentFileWord;
-
-      if (isWordEnglish(sentenceWord)) {
-        translatorFile.open("en-hy.txt");
-      } else {
-        translatorFile.open("hy-en.txt");
+    for (int i = 0; i < fileWord.length(); i++) {
+      if (filterFileWordSigns(fileWord[i]) && fileWord[i] == sentenceWord[i]) {
+        result += fileWord[i];
       }
-
-      while (getline(translatorFile, fileWord)) {
-        currentFileWord = "";
-
-        for (int i = 0; i < fileWord.length(); i++) {
-          if (filterFileWordSigns(fileWord[i]) && fileWord[i] == sentenceWord[i]) {
-            currentFileWord += fileWord[i];
-          }
-        }
-
-        if (currentFileWord == sentenceWord) {
-          break;
-        }
-      }
-
-      if (currentFileWord != "" && currentFileWord == sentenceWord) {
-        for (int i = 0; i < fileWord.length(); i++) {
-          if (filterFileWordSigns(fileWord[i]) && fileWord[i] != sentenceWord[i]) {
-            cout << fileWord[i];
-          }
-        }
-
-        cout << " ";
-      } else {
-        cout << sentenceWord << " ";
-      }
-
-      translatorFile.close();
-      sentenceWord = "";
-      continue;
     }
 
-    sentenceWord += sentence[i];
+    if (result == sentenceWord) {
+      break;
+    }
   }
 
-  cout << endl;
+  return result;
+}
 
-  return 0;
+string translatedWord(string fileWord, string sentenceWord) {
+  string result = "";
+
+  for (int i = 0; i < fileWord.length(); i++) {
+    if (filterFileWordSigns(fileWord[i]) && fileWord[i] != sentenceWord[i]) {
+      result += fileWord[i];
+    }
+  }
+
+  return result;
 }

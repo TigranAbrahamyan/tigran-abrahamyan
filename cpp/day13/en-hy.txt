@@ -1,8 +1,8 @@
 hello -> բարև
+day - օր
 name -> անուն
 goodbye -> ստեսություն
 dog -> շուն
 apple -> խնձոր
 language -> լեզու
 computer -> համակարգիչ
-programming -> ծրագրավորում
