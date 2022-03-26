@@ -10,6 +10,18 @@ using namespace std;
 ifstream COUNTRIES_FILE;
 string COUNTRIES_FILENAME = "countries.txt";
 
+enum CountryCodes {
+  ARMENIA = 374,
+  GEORGIA = 995,
+  RUSSIA = 7,
+  USA = 1,
+  GERMANY = 49,
+  ITALY = 39,
+  JAPAN = 81,
+  AUSTRALIA = 61,
+  UKRAINE = 380
+};
+
 enum SearchModes {
   COUNTRY_NAME = 1,
   CAPITAL = 2,
@@ -27,7 +39,7 @@ struct Country {
 };
 
 int getCountriesSize();
-void initializeCountries(Country*);
+void initializeCountries(Country*, int*);
 void searchCountryInfo(Country*, int);
 char diff(long long, long long);
 void getFirstAndSecondCountry(Country*, Country&, Country&, int);
@@ -35,8 +47,9 @@ void compareCountries(Country*, int);
 
 int main(int argc, char *argv[]) {
   int countriesSize = getCountriesSize();
+  int countryCodes[countriesSize] = { ARMENIA, GEORGIA, RUSSIA, USA, GERMANY, ITALY, JAPAN, AUSTRALIA, UKRAINE };
   Country country[countriesSize];
-  initializeCountries(country);
+  initializeCountries(country, countryCodes);
 
   if (argc != 1 && strcmp(argv[1], "search") == 0) {
     searchCountryInfo(country, countriesSize);
@@ -63,7 +76,7 @@ int getCountriesSize() {
   return result;
 }
 
-void initializeCountries(Country *country) {
+void initializeCountries(Country *country, int *countryCodes) {
   try {
     COUNTRIES_FILE.open(COUNTRIES_FILENAME);
 
@@ -75,7 +88,7 @@ void initializeCountries(Country *country) {
     int countryIndex = 0;
 
     while (getline(COUNTRIES_FILE, fileLine)) {
-      string countriesInfo[7] = {};
+      string countriesInfo[6] = {};
       int j = 0;
 
       for (int i = 0; i < fileLine.length(); i++) {
@@ -95,7 +108,7 @@ void initializeCountries(Country *country) {
       country[countryIndex].population = stoi(countriesInfo[3]);
       country[countryIndex].area = stoi(countriesInfo[4]);
       country[countryIndex].GDP = stoll(countriesInfo[5]);
-      country[countryIndex].countryCode = stoi(countriesInfo[6]);
+      country[countryIndex].countryCode = countryCodes[countryIndex];
 
       countryIndex++;
     }
