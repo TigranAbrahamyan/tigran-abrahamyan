@@ -191,6 +191,10 @@ void getFirstAndSecondCountry(Country *country, Country &firstCountry, Country &
   bool isFoundSecondCountry = false;
 
   for (int i = 0; i < countriesSize; i++) {
+    if (isFoundFirstCountry && isFoundSecondCountry) {
+      break;
+    }
+
     if (strToLower(firstCountry.countryName) == strToLower(country[i].countryName)) {
       firstCountry = country[i];
       isFoundFirstCountry = true;
