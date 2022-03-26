@@ -20,7 +20,7 @@ enum WEEKDAYS {
   SATURDAY
 };
 
-struct Note {
+struct Diary {
   string note;
   string weekday;
   int weekdayNumber;
@@ -28,12 +28,12 @@ struct Note {
 
 void getSplittedDate(string, string*);
 string getWeekday(int);
-void getWeekday(int, int, int, Note&);
-void writeNoteToFile(int, int, int, string, string, Note);
+void getWeekday(int, int, int, Diary&);
+void writeNoteToFile(int, int, int, Diary);
 void readFilesFromDir(DIR*);
 
 int main() {
-  Note myNote;
+  Diary myDiary;
 
   while (true) {
     string date = "";
@@ -50,12 +50,11 @@ int main() {
     DAYS[1] = year % 4 == 0 ? 29 : 28;
 
     if (day <= DAYS[month - 1] && month <= 12 && year >= 1900) {
-      string note = "";
       cout << "Add note: ";
-      getline(cin, note);
+      getline(cin, myDiary.note);
 
-      getWeekday(day, month, year, myNote);
-      writeNoteToFile(day, month, year, date, note, myNote);
+      getWeekday(day, month, year, myDiary);
+      writeNoteToFile(day, month, year, myDiary);
 
       string command = "";
       cout << "Command (add/exit, or another key): ";
@@ -99,41 +98,29 @@ void getSplittedDate(string date, string *splittedDate) {
 }
 
 string getWeekday(int weekdayNumber) {
-  string weekday = "";
-
   switch (weekdayNumber) {
     case SUNDAY:
-      weekday = "Sunday";
-      break;
+      return "Sunday";
     case MONDAY:
-      weekday = "Monday";
-      break;
+      return "Monday";
     case TUESDAY:
-      weekday = "Tuesday";
-      break;
+      return "Tuesday";
     case WEDNESDAY:
-      weekday = "Wednesday";
-      break;
+      return "Wednesday";
     case THURSDAY:
-      weekday = "Thursday";
-      break;
+      return "Thursday";
     case FRIDAY:
-      weekday = "Friday";
-      break;
+      return "Friday";
     case SATURDAY:
-      weekday = "Saturday";
-      break;
-    default:
-      break;
+      return "Saturday";
   }
 
-  return weekday;
-
+  return "";
   // const string weekdays[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
   // return weekdays[weekdayNumber];
 }
 
-void getWeekday(int day, int month, int year, Note &myNote) {
+void getWeekday(int day, int month, int year, Diary &myDiary) {
   tm time_in = {
     0, 0, 0, // second, minute, hour
     day, month - 1, year - 1900 // 1-based day, 0-based month, year since 1900
@@ -142,35 +129,34 @@ void getWeekday(int day, int month, int year, Note &myNote) {
   const time_t time_temp = mktime(&time_in);
   const tm * time_out = localtime(&time_temp);
 
-  myNote.weekdayNumber = time_out->tm_wday; // Sunday == 0, Monday == 1
-  myNote.weekday = getWeekday(myNote.weekdayNumber);
+  myDiary.weekdayNumber = time_out->tm_wday; // Sunday == 0, Monday == 1
+  myDiary.weekday = getWeekday(myDiary.weekdayNumber);
 }
 
-void writeNoteToFile(int day, int month, int year, string date, string note, Note myNote) {
+void writeNoteToFile(int day, int month, int year, Diary myDiary) {
   string convertedDay = day < 10 ? "0" + to_string(day) : to_string(day);
   string convertedMonth = month < 10 ? "0" + to_string(month) : to_string(month);
   string convertedYear = to_string(year);
+  string convertedDate = convertedDay + "_" + convertedMonth + "_" + convertedYear;
+  string filename = "./notes/" + convertedDate + ".txt";
+  ifstream inputDiaryFile(filename);
+  ofstream outputDiaryFile(filename, ios::app);
 
-  string filename = "./notes/" + convertedDay + "_" + convertedMonth + "_" + convertedYear + ".txt";
-
-  string fileLine = "";
-  ifstream inputNoteFile(filename);
-  ofstream outputNoteFile(filename, ios::app);
-
-  if (inputNoteFile.is_open()) {
-    while (getline(inputNoteFile, fileLine)) {
-      if (fileLine != myNote.weekday) {
-        outputNoteFile << "- " << "Note: " << note << endl;
+  if (inputDiaryFile.good()) {
+    string fileLine = "";
+    while (getline(inputDiaryFile, fileLine)) {
+      if (fileLine != myDiary.weekday) {
+        outputDiaryFile << "- " << "Note: " << myDiary.note << endl;
         break;
       }
     }
   } else {
-    outputNoteFile << myNote.weekday + " " + date << endl;
-    outputNoteFile << "- " << "Note: " << note << endl;
+    outputDiaryFile << myDiary.weekday + " " + convertedDate << endl;
+    outputDiaryFile << "- " << "Note: " << myDiary.note << endl;
   }
 
-  inputNoteFile.close();
-  outputNoteFile.close();
+  inputDiaryFile.close();
+  outputDiaryFile.close();
 }
 
 void readFilesFromDir(DIR *dir) {
@@ -183,24 +169,24 @@ void readFilesFromDir(DIR *dir) {
     bool isTXT = regex_match(file, txtRegex);
 
     if (isTXT) {
-      string str = "";
-      ifstream noteFile;
-      noteFile.open("./notes/" + file);
+      ifstream diaryFile;
+      diaryFile.open("./notes/" + file);
 
       try {
-        if (noteFile.fail()) {
+        if (diaryFile.fail()) {
           throw ("File " + file + " not found.");
         }
 
-        while (getline(noteFile, str)) {
+        string str = "";
+        while (getline(diaryFile, str)) {
           cout << str << endl;
         }
-
-        cout << endl;
-        noteFile.close();
       } catch (const string err) {
-        cout << err;
+        cout << err << endl;
       }
+
+      cout << endl;
+      diaryFile.close();
     }
 
     entity = readdir(dir);
