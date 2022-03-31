@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "../lib/alphabet/alphabet.h"
 
 using namespace std;
 
@@ -18,7 +19,7 @@ struct Car {
   double enginyCapacity;
 };
 
-enum CarFilterOptions {
+enum CarFilterOptionsEnum {
   ALL_CARS = 1,
   BRAND = 2,
   PRICE = 3,
@@ -27,6 +28,12 @@ enum CarFilterOptions {
   ENGINY_CAPACITY = 6,
   YEAR = 7,
   COLOR = 8
+};
+
+enum MinMaxEnum {
+  MIN = 1,
+  MAX = 2,
+  MIN_MAX = 3
 };
 
 int getCarsLength();
@@ -217,9 +224,9 @@ void filterByOption(Car *car, int carsLength, int mode, string ctx) {
 
   for (int i = 0; i < carsLength; i++) {
     if (
-      (mode == BRAND && car[i].brand == option)
-      || (mode == GEARBOX && car[i].gearbox == option)
-      || (mode == COLOR && car[i].color == option)
+      (mode == BRAND && strToLower(car[i].brand) == strToLower(option))
+      || (mode == GEARBOX && strToLower(car[i].gearbox) == strToLower(option))
+      || (mode == COLOR && strToLower(car[i].color) == strToLower(option))
     ) {
       filteredCars[i] = car[i];
       isFound = true;
@@ -244,13 +251,13 @@ void filterByMinMax(Car *car, int carsLength, int mode, string ctx) {
   double min = 0;
   double max = 0;
 
-  if (option == 1) {
+  if (option == MIN) {
     cout << "Min " << ctx << ": ";
     cin >> min;
-  } else if (option == 2) {
+  } else if (option == MAX) {
     cout << "Max " << ctx << ": ";
     cin >> max;
-  } else if (option == 3) {
+  } else if (option == MIN_MAX) {
     cout << "Min-Max " << ctx << ": " << endl;
     cin >> min >> max;
   } else {
@@ -264,21 +271,21 @@ void filterByMinMax(Car *car, int carsLength, int mode, string ctx) {
   for (int i = 0; i < carsLength; i++) {
     if (
       // --------price--------
-      (mode == PRICE && option == 1 && car[i].price >= min)
-      || (mode == PRICE && option == 2 && car[i].price <= max)
-      || (mode == PRICE && option == 3 && (car[i].price <= max && car[i].price >= min))
+      (mode == PRICE && option == MIN && car[i].price >= min)
+      || (mode == PRICE && option == MAX && car[i].price <= max)
+      || (mode == PRICE && option == MIN_MAX && (car[i].price <= max && car[i].price >= min))
       // --------mileage--------
-      || (mode == MILEAGE && option == 1 && car[i].mileage >= min)
-      || (mode == MILEAGE && option == 2 && car[i].mileage <= max)
-      || (mode == MILEAGE && option == 3 && (car[i].mileage <= max && car[i].mileage >= min))
+      || (mode == MILEAGE && option == MIN && car[i].mileage >= min)
+      || (mode == MILEAGE && option == MAX && car[i].mileage <= max)
+      || (mode == MILEAGE && option == MIN_MAX && (car[i].mileage <= max && car[i].mileage >= min))
       // --------enginy capacity--------
-      || (mode == ENGINY_CAPACITY && option == 1 && car[i].enginyCapacity >= min)
-      || (mode == ENGINY_CAPACITY && option == 2 && car[i].enginyCapacity <= max)
-      || (mode == ENGINY_CAPACITY && option == 3 && (car[i].enginyCapacity <= max && car[i].enginyCapacity >= min))
+      || (mode == ENGINY_CAPACITY && option == MIN && car[i].enginyCapacity >= min)
+      || (mode == ENGINY_CAPACITY && option == MAX && car[i].enginyCapacity <= max)
+      || (mode == ENGINY_CAPACITY && option == MIN_MAX && (car[i].enginyCapacity <= max && car[i].enginyCapacity >= min))
       // --------year--------
-      || (mode == YEAR && option == 1 && car[i].year >= min)
-      || (mode == YEAR && option == 2 && car[i].year <= max)
-      || (mode == YEAR && option == 3 && (car[i].year <= max && car[i].year >= min))
+      || (mode == YEAR && option == MIN && car[i].year >= min)
+      || (mode == YEAR && option == MAX && car[i].year <= max)
+      || (mode == YEAR && option == MIN_MAX && (car[i].year <= max && car[i].year >= min))
     ) {
       filteredCars[i] = car[i];
       isFound = true;
