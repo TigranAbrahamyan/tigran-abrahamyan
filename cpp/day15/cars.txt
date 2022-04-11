@@ -1,0 +1,10 @@
+Toyota, Camry, 29800, 1500, 2.5, automatic, 2021, white
+Hyundai, Sonata, 7700, 200000, 2.4, automatic, 2012, black
+Audi, R8, 110000, 50000, 4.2, automatic, 2018, gray
+VAZ, 2107, 3300, 77000, 1.7, mechanic, 2010, black
+GAZ, 24(Volga), 1100, 90000, 2.4, mechanic, 1978, gray
+Porsche, Panamera, 80000, 143000, 3.6, automatic, 2020, black
+Toyota, 4Runner, 44000, 66000, 4.0, automatic, 2016, gray
+Kia, Forte, 7000, 175000, 2.0, automatic, 2011, white
+Suzuki, Grand Vitara, 9400, 177000, 2.7, automatic, 2006, white
+Honda, Accord, 13900, 141000, 2.4, automatic, 2015, gray

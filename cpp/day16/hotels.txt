@@ -1,0 +1,7 @@
+aurora, yerevan, 4, no, [2-2000, 5-5000]
+valex, yerevan, 4, yes, [5-4000, 7-7000, 2-3000]
+valex, vanadzor, 5, yes, [2-2000, 4-4000]
+4room hotel, vanadzor, 4, no, [1-2000, 3-7000, 2-4000, 5-9000]
+valex, stepanakert, 5, yes, [1-3000, 4-9000, 8-20000]
+Hotel Ambiance, Los Angeles, 5, no, [2-3000, 4-9000]
+Hotel Liberty, Hawaii, 5, yes, [1-4000, 4-18000, 8-29000, 10-90000]

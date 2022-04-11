@@ -1,0 +1,8 @@
+բարև -> hello
+օր -> day
+անուն -> name
+ստեսություն -> goodbye
+շուն ֊> dog
+խնձոր ֊> apple
+լեզու -> language
+համակարգիչ -> computer
