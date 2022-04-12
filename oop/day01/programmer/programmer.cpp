@@ -2,12 +2,14 @@
 #include "./programmer.h"
 
 Programmer::Programmer(
-  Date birthDate,
+  Date* birthDate,
   Gender gender,
   EyeColor eyeColor,
   HairColor hairColor,
   Human* father,
   Human* mother,
+  short weight,
+  Address* address,
   std::string firstName,
   std::string lastName,
   std::string fatherName,
@@ -15,8 +17,8 @@ Programmer::Programmer(
   WorkPlace workPlace,
   ProgrammingLanguage language,
   Level level,
-  short salary
-) : HomoSapience(birthDate, gender, eyeColor, hairColor, father, mother, firstName, lastName, fatherName, nationality) {
+  unsigned int salary
+) : HomoSapience(birthDate, gender, eyeColor, hairColor, father, mother, weight, address, firstName, lastName, fatherName, nationality) {
   _workPlace = workPlace;
   _language = language;
   _level = level;
@@ -27,31 +29,31 @@ void Programmer::work() {
   return;
 }
 
-WorkPlace Programmer::getWorkPlace() {
+WorkPlace Programmer::getWorkPlace() const {
   return _workPlace;
 }
 
 void Programmer::setWorkPlace(WorkPlace workPlace) {
-  if (workPlace == GOOGLE || workPlace == AMAZON) {
+  if (workPlace == INSTIGATE_MOBILE || workPlace == GOOGLE || workPlace == AMAZON) {
     _workPlace = workPlace;
   } else {
-    _workPlace = GOOGLE;
+    _workPlace = INSTIGATE_MOBILE;
   }
 }
 
-ProgrammingLanguage Programmer::getLanguage() {
+ProgrammingLanguage Programmer::getLanguage() const {
   return _language;
 }
 
 void Programmer::setLanguage(ProgrammingLanguage language) {
-  if (language == C || language == CPP || language == JAVA) {
+  if (language == C || language == CPP || language == CSHARP || language == JAVA) {
     _language = language;
   } else {
     _language = C;
   }
 }
 
-Level Programmer::getLevel() {
+Level Programmer::getLevel() const {
   return _level;
 }
 
@@ -63,10 +65,10 @@ void Programmer::setLevel(Level level) {
   }
 }
 
-short Programmer::getSalary() {
+unsigned int Programmer::getSalary() const {
   return _level;
 }
 
-void Programmer::setSalary(short salary) {
+void Programmer::setSalary(unsigned int salary) {
   _salary = salary;
 }

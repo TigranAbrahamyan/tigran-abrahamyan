@@ -1,14 +1,13 @@
 #include "./human.h"
-#include "../date/date.h"
-#include "../drink/drink.h"
 
 Human::Human(
-  Date birthDate,
+  Date* birthDate,
   Gender gender,
   EyeColor eyeColor,
   HairColor hairColor,
   Human* father,
-  Human* mother
+  Human* mother,
+  short weight
 ) {
   _birthDate = birthDate;
   _gender = gender;
@@ -16,6 +15,7 @@ Human::Human(
   _hairColor = hairColor;
   _father = father;
   _mother = mother;
+  _weight = weight;
   _healthLevel = 100;
 }
 
@@ -27,41 +27,55 @@ void Human::walk() {
   if (_healthLevel < 100) {
     _healthLevel++;
   }
+
+  _weight--;
 }
 
-void Human::digestion() {
+void Human::digest() {
   if (_healthLevel < 100) {
     _healthLevel++;
   }
 }
 
-void Human::drink(Drink drink) {
-  int healthLevel;
-
-  if (drink.getType() == ALCOHOL) {
-    healthLevel = _healthLevel - 5;
+void Human::goToGym() {
+  if (_healthLevel < 100) {
+    _healthLevel++;
   }
 
-  if (drink.getType() == MILK || drink.getType() == TEA) {
-    healthLevel = (_healthLevel >= 95 && _healthLevel <= 100) ? 100 : _healthLevel + 5;
-  }
-
-  Human::setHealthLevel(healthLevel);
+  _weight--;
 }
 
-Date Human::getBirthDate() {
+void Human::eat(Food food) {
+  if ((food == BANAN || food == FISH) && _healthLevel < 100) {
+    _healthLevel++;
+  }
+
+  if ((food == HAMBURGER || food == HOT_DOG) && _healthLevel < 100) {
+    _healthLevel--;
+  }
+
+  _weight++;
+}
+
+void Human::drink(Drink drink) {
+  if (drink == ALCOHOL) {
+    _healthLevel = _healthLevel - 5;
+  }
+
+  if (drink == MILK || drink == TEA) {
+    _healthLevel = (_healthLevel >= 95 && _healthLevel <= 100) ? 100 : _healthLevel + 5;
+  }
+}
+
+Date* Human::getBirthDate() const {
   return _birthDate;
 }
 
-void Human::setBirthDate(Date birthDate) {
+void Human::setBirthDate(Date* birthDate) {
   _birthDate = birthDate;
 }
 
-Gender Human::getGender() {
-  return _gender;
-}
-
-EyeColor Human::getEyeColor() {
+EyeColor Human::getEyeColor() const {
   return _eyeColor;
 }
 
@@ -73,7 +87,7 @@ void Human::setEyeColor(EyeColor eyeColor) {
   }
 }
 
-HairColor Human::getHairColor() {
+HairColor Human::getHairColor() const {
   return _hairColor;
 }
 
@@ -85,22 +99,18 @@ void Human::setHairColor(HairColor hairColor) {
   }
 }
 
-Human* Human::getFather() {
+Gender Human::getGender() const {
+  return _gender;
+}
+
+Human* Human::getFather() const {
   return _father;
 }
 
-Human* Human::getMother() {
+Human* Human::getMother() const {
   return _mother;
 }
 
-int Human::getHealthLevel() {
+short Human::getHealthLevel() const {
   return _healthLevel;
-}
-
-void Human::setHealthLevel(int healthLevel) {
-  if (healthLevel >= 1 && healthLevel <= 100) {
-    _healthLevel = healthLevel;
-  } else {
-    _healthLevel = 1;
-  }
 }

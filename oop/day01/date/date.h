@@ -1,23 +1,27 @@
 #ifndef DATE_H
 #define DATE_H
 
+#include <string>
+
 class Date {
   private:
-    int _year;
-    int _month;
-    int _day;
+    short _year;
+    short _month;
+    short _day;
 
   public:
-    Drink(int year, int month, int day);
+    Date(short year, short month, short day);
 
-    int getYear();
-    void setYear(int year);
+    short getYear() const;
+    void setYear(short year);
 
-    int getMonth();
-    void setMonth(int month);
+    short getMonth() const;
+    void setMonth(short month);
 
-    int getDay();
-    void setDay(int day);
+    short getDay() const;
+    void setDay(short day);
+
+    std::string getFullDate() const;
 };
 
 #endif

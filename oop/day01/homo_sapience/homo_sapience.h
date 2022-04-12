@@ -3,6 +3,7 @@
 
 #include <string>
 #include "../human/human.h"
+#include "../address/address.h"
 
 enum Nationality {
   ENGLISH = 0,
@@ -11,6 +12,7 @@ enum Nationality {
 
 class HomoSapience : public Human {
   private:
+    Address* _address;
     std::string _firstName;
     std::string _lastName;
     std::string _fatherName;
@@ -21,20 +23,22 @@ class HomoSapience : public Human {
 
   public:
     HomoSapience(
-      Date birthDate,
+      Date* birthDate,
       Gender gender,
       EyeColor eyeColor,
       HairColor hairColor,
       Human* father,
       Human* mother,
+      short weight,
+      Address* address,
       std::string firstName,
       std::string lastName,
       std::string fatherName,
       Nationality nationality
     );
 
-    std::string getFullName();
-    Nationality getNationality();
+    std::string getFullName() const;
+    Nationality getNationality() const;
 };
 
 #endif

@@ -5,14 +5,16 @@
 #include "../homo_sapience/homo_sapience.h"
 
 enum WorkPlace {
-  GOOGLE = 0,
-  AMAZON = 1
+  INSTIGATE_MOBILE = 0,
+  GOOGLE = 1,
+  AMAZON = 2
 };
 
 enum ProgrammingLanguage {
   C = 0,
   CPP = 1,
-  JAVA = 2
+  CSHARP = 2,
+  JAVA = 3
 };
 
 enum Level {
@@ -27,16 +29,18 @@ class Programmer : public HomoSapience {
     WorkPlace _workPlace;
     ProgrammingLanguage _language;
     Level _level;
-    short _salary;
+    unsigned int _salary;
 
   public:
     Programmer(
-      Date birthDate,
+      Date* birthDate,
       Gender gender,
       EyeColor eyeColor,
       HairColor hairColor,
       Human* father,
       Human* mother,
+      short weight,
+      Address* address,
       std::string firstName,
       std::string lastName,
       std::string fatherName,
@@ -44,22 +48,22 @@ class Programmer : public HomoSapience {
       WorkPlace workPlace,
       ProgrammingLanguage language,
       Level level,
-      short salary
+      unsigned int salary
     );
 
     void work() override;
 
-    WorkPlace getWorkPlace();
+    WorkPlace getWorkPlace() const;
     void setWorkPlace(WorkPlace workPlace);
 
-    ProgrammingLanguage getLanguage();
+    ProgrammingLanguage getLanguage() const;
     void setLanguage(ProgrammingLanguage language);
 
-    Level getLevel();
+    Level getLevel() const;
     void setLevel(Level level);
 
-    short getSalary();
-    void setSalary(short salary);
+    unsigned int getSalary() const;
+    void setSalary(unsigned int salary);
 };
 
 #endif

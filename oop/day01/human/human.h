@@ -3,7 +3,6 @@
 
 #include <string>
 #include "../date/date.h"
-#include "../drink/drink.h"
 
 enum Gender {
   MALE = 0,
@@ -21,47 +20,63 @@ enum HairColor {
   RED = 1
 };
 
+enum Drink {
+  ALCOHOL = 0,
+  JUICE = 1,
+  MILK = 2,
+  TEA = 3,
+  COFFEE = 4
+};
+
+enum Food {
+  BANAN = 0,
+  FISH = 1,
+  HAMBURGER = 2,
+  HOT_DOG = 3
+};
+
 class Human {
   private:
-    Date _birthDate;
+    Date* _birthDate;
     Gender _gender;
     EyeColor _eyeColor;
     HairColor _hairColor;
     Human* _father;
     Human* _mother;
-    int _healthLevel;
+    short _healthLevel;
+    short _weight;
 
   public:
     Human(
-      Date birthDate,
+      Date* birthDate,
       Gender gender,
       EyeColor eyeColor,
       HairColor hairColor,
       Human* father,
-      Human* mother
+      Human* mother,
+      short weight
     );
 
     std::string speak(std::string text);
     void walk();
-    void digestion();
+    void digest();
+    void goToGym();
     void drink(Drink drink);
+    void eat(Food food);
 
-    Date getBirthDate();
-    void setBirthDate(Date birthDate);
+    Date* getBirthDate() const;
+    void setBirthDate(Date* birthDate);
 
-    Gender getGender();
-
-    EyeColor getEyeColor();
+    EyeColor getEyeColor() const;
     void setEyeColor(EyeColor eyeColor);
 
-    HairColor getHairColor();
+    HairColor getHairColor() const;
     void setHairColor(HairColor hairColor);
 
-    Human* getFather();
-    Human* getMother();
-
-    int getHealthLevel();
-    void setHealthLevel(int healthLevel);
+    Gender getGender() const;
+    Human* getFather() const;
+    Human* getMother() const;
+    short getHealthLevel() const;
 };
 
 #endif
