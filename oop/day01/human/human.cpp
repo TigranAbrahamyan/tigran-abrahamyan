@@ -19,6 +19,22 @@ Human::Human(
   _healthLevel = 100;
 }
 
+std::string Human::speak(std::string text) {
+  return text;
+}
+
+void Human::walk() {
+  if (_healthLevel < 100) {
+    _healthLevel++;
+  }
+}
+
+void Human::digestion() {
+  if (_healthLevel < 100) {
+    _healthLevel++;
+  }
+}
+
 void Human::drink(Drink drink) {
   int healthLevel;
 
@@ -73,16 +89,8 @@ Human* Human::getFather() {
   return _father;
 }
 
-void Human::setFather(Human* father) {
-  _father = father;
-}
-
 Human* Human::getMother() {
   return _mother;
-}
-
-void Human::setMother(Human* mother) {
-  _mother = mother;
 }
 
 int Human::getHealthLevel() {

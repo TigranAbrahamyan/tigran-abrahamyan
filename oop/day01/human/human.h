@@ -1,9 +1,9 @@
+#ifndef HUMAN_H
+#define HUMAN_H
+
 #include <string>
 #include "../date/date.h"
 #include "../drink/drink.h"
-
-#ifndef HUMAN_H
-#define HUMAN_H
 
 enum Gender {
   MALE = 0,
@@ -41,6 +41,9 @@ class Human {
       Human* mother
     );
 
+    std::string speak(std::string text);
+    void walk();
+    void digestion();
     void drink(Drink drink);
 
     Date getBirthDate();
@@ -55,10 +58,7 @@ class Human {
     void setHairColor(HairColor hairColor);
 
     Human* getFather();
-    void setFather(Human* father);
-
     Human* getMother();
-    void setMother(Human* mother);
 
     int getHealthLevel();
     void setHealthLevel(int healthLevel);
