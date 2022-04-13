@@ -57,6 +57,8 @@ class Human {
       short weight
     );
 
+    Human(const Human&) = default;
+
     std::string speak(std::string text);
     void walk();
     void digest();

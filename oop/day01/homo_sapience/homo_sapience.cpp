@@ -2,19 +2,13 @@
 #include "./homo_sapience.h"
 
 HomoSapience::HomoSapience(
-  Date* birthDate,
-  Gender gender,
-  EyeColor eyeColor,
-  HairColor hairColor,
-  Human* father,
-  Human* mother,
-  short weight,
+  const Human& human,
   Address* address,
   std::string firstName,
   std::string lastName,
   std::string fatherName,
   Nationality nationality
-) : Human(birthDate, gender, eyeColor, hairColor, father, mother, weight) {
+) : Human(human) {
   _address = address;
   _firstName = firstName;
   _lastName = lastName;

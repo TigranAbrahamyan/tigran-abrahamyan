@@ -1,24 +1,12 @@
-#include <string>
 #include "./programmer.h"
 
 Programmer::Programmer(
-  Date* birthDate,
-  Gender gender,
-  EyeColor eyeColor,
-  HairColor hairColor,
-  Human* father,
-  Human* mother,
-  short weight,
-  Address* address,
-  std::string firstName,
-  std::string lastName,
-  std::string fatherName,
-  Nationality nationality,
+  const HomoSapience& homoSapience,
   WorkPlace workPlace,
   ProgrammingLanguage language,
   Level level,
   unsigned int salary
-) : HomoSapience(birthDate, gender, eyeColor, hairColor, father, mother, weight, address, firstName, lastName, fatherName, nationality) {
+) : HomoSapience(homoSapience) {
   _workPlace = workPlace;
   _language = language;
   _level = level;

@@ -23,19 +23,15 @@ class HomoSapience : public Human {
 
   public:
     HomoSapience(
-      Date* birthDate,
-      Gender gender,
-      EyeColor eyeColor,
-      HairColor hairColor,
-      Human* father,
-      Human* mother,
-      short weight,
+      const Human& human,
       Address* address,
       std::string firstName,
       std::string lastName,
       std::string fatherName,
       Nationality nationality
     );
+
+    HomoSapience(const HomoSapience&) = default;
 
     std::string getFullName() const;
     Nationality getNationality() const;

@@ -1,7 +1,6 @@
 #ifndef PROGRAMMER_H
 #define PROGRAMMER_H
 
-#include <string>
 #include "../homo_sapience/homo_sapience.h"
 
 enum WorkPlace {
@@ -33,23 +32,14 @@ class Programmer : public HomoSapience {
 
   public:
     Programmer(
-      Date* birthDate,
-      Gender gender,
-      EyeColor eyeColor,
-      HairColor hairColor,
-      Human* father,
-      Human* mother,
-      short weight,
-      Address* address,
-      std::string firstName,
-      std::string lastName,
-      std::string fatherName,
-      Nationality nationality,
+      const HomoSapience& homoSapience,
       WorkPlace workPlace,
       ProgrammingLanguage language,
       Level level,
       unsigned int salary
     );
+
+    Programmer(const Programmer&) = default;
 
     void work() override;
 
