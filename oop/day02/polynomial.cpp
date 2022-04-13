@@ -1,98 +1,109 @@
 #include <iostream>
-#include <string>
 #include <math.h>
+#include "./polynomial.h"
 
 using namespace std;
 
-class Polynomial {
-  private:
-    int _numberOfPolynomials;
-    int _x;
+Polynomial::Polynomial(int degree, int x) {
+  _degree = degree;
+  _x = x;
+  _arr = new int[_degree];
+  _nArr = new int[_degree];
+  for (int i = 0; i <= _degree; i++) {
+    _arr[i] = i;
+  }
+}
 
-  public:
-    Polynomial(int numberOfPolynomials, int x) {
-      _numberOfPolynomials = numberOfPolynomials;
-      _x = x;
+void Polynomial::print(int result, char polynomialOperatorChar) {
+  for (int i = _degree; i >= 0; i--) {
+    cout << "(" << to_string(_nArr[i]) << "*x^" << to_string(i) << ")";
+    if (i != 0) {
+      cout << polynomialOperatorChar;
     }
+  }
 
-    int add() {
-      cout << endl << "Add.." << endl;
-      int numberOfPolynomials = _numberOfPolynomials;
-      int result = 0;
-      string polynomialExpression;
+  cout << " = " << result;
+}
 
-      while (numberOfPolynomials > -1) {
-        int n;
-        cout << "a[" << numberOfPolynomials << "] = ";
-        cin >> n;
+int Polynomial::add() {
+  int n;
+  int result = 0;
 
-        result += (n * pow(_x, numberOfPolynomials));
-        polynomialExpression += ("(" + to_string(n) + "*x^" + to_string(numberOfPolynomials) + ")" + "+");
-        numberOfPolynomials--;
-      }
+  for (int i = _degree; i >= 0; i--) {
+    cout << "a[" << i << "] = ";
+    cin >> n;
+    _nArr[i] = n;
+    result += (n * pow(_x, i));
+  }
 
-      cout << polynomialExpression.substr(0, polynomialExpression.length() - 1) << " = ";
+  return result;
+}
 
-      return result;
-    }
+int Polynomial::subtract() {
+  int n;
+  int result = 0;
 
-    int subtract() {
-      cout << endl << "Subtract.." << endl;
-      int numberOfPolynomials = _numberOfPolynomials;
-      int result = 0;
-      string polynomialExpression;
+  for (int i = _degree; i >= 0; i--) {
+    cout << "a[" << i << "] = ";
+    cin >> n;
+    _nArr[i] = n;
+    result -= (n * pow(_x, i));
+  }
 
-      while (numberOfPolynomials > -1) {
-        int n;
-        cout << "a[" << numberOfPolynomials << "] = ";
-        cin >> n;
+  return result;
+}
 
-        result -= (n * pow(_x, numberOfPolynomials));
-        polynomialExpression += ("(" + to_string(n) + "*x^" + to_string(numberOfPolynomials) + ")" + "-");
-        numberOfPolynomials--;
-      }
+int Polynomial::multiply() {
+  int n;
+  int result = 1;
 
-      cout << polynomialExpression.substr(0, polynomialExpression.length() - 1) << " = ";
+  for (int i = _degree; i >= 0; i--) {
+    cout << "a[" << i << "] = ";
+    cin >> n;
+    _nArr[i] = n;
+    result *= (n * pow(_x, i));
+  }
 
-      return result;
-    }
-
-    int multiply() {
-      cout << endl << "Multiply.." << endl;
-      int numberOfPolynomials = _numberOfPolynomials;
-      int result = 1;
-      string polynomialExpression;
-
-      while (numberOfPolynomials > -1) {
-        int n;
-        cout << "a[" << numberOfPolynomials << "] = ";
-        cin >> n;
-
-        result *= (n * pow(_x, numberOfPolynomials));
-        polynomialExpression += ("(" + to_string(n) + "*x^" + to_string(numberOfPolynomials) + ")" + "*");
-        numberOfPolynomials--;
-      }
-
-      cout << polynomialExpression.substr(0, polynomialExpression.length() - 1) << " = ";
-
-      return result;
-    }
-};
+  return result;
+}
 
 int main() {
-  int numberOfPolynomials;
+  char polynomialOperatorChar;
+  int polynomialOperator;
+  int degree;
   int x;
 
-  cout << "Input number of polynomials: ";
-  cin >> numberOfPolynomials;
+  cout << "1) Add" << endl << "2) Subtract" << endl << "3) Multiply" << endl << "Option: ";
+  cin >> polynomialOperator;
+
+  cout << "Input degree: ";
+  cin >> degree;
 
   cout << "Input x: ";
   cin >> x;
 
-  Polynomial* polynomial = new Polynomial(numberOfPolynomials, x);
-  cout << polynomial->add() << endl;
-  cout << polynomial->subtract() << endl;
-  cout << polynomial->multiply() << endl;
+  int result;
+  Polynomial* polynomial = new Polynomial(degree, x);
+
+  switch (polynomialOperator) {
+    case 1:
+      result = polynomial->add();
+      polynomialOperatorChar = '+';
+      break;
+    case 2:
+      result = polynomial->subtract();
+      polynomialOperatorChar = '-';
+      break;
+    case 3:
+      result = polynomial->multiply();
+      polynomialOperatorChar = '*';
+      break;
+    default:
+      cout << "Operator not found\n";
+      return 0;
+  }
+
+  polynomial->print(result, polynomialOperatorChar);
 
   return 0;
 }
