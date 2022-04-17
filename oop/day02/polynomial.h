@@ -1,19 +1,32 @@
-#include <iostream>
 
-using namespace std;
+#ifndef POLYNOMIAL_H
+#define POLYNOMIAL_H
 
 class Polynomial {
   private:
+    double* _coefficents;
     int _degree;
-    int _x;
-    int* _arr;
-    int* _nArr;
 
   public:
-    Polynomial(int, int);
+    Polynomial(double*, int);
+    Polynomial();
+    ~Polynomial();
 
-    void print(int, char);
-    int add();
-    int subtract();
-    int multiply();
+    Polynomial add(Polynomial);
+    Polynomial operator+(Polynomial);
+    Polynomial operator+=(Polynomial);
+
+    Polynomial subtract(Polynomial);
+    Polynomial operator-(Polynomial);
+    Polynomial operator-=(Polynomial);
+
+    Polynomial multiply(Polynomial);
+    Polynomial operator*(Polynomial);
+    Polynomial operator*=(Polynomial);
+
+    friend std::ostream &operator<<(std::ostream&, const Polynomial&);
+
+    void print();
 };
+
+#endif
