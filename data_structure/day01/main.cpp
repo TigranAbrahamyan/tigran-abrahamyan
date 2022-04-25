@@ -8,10 +8,10 @@ int main() {
   list.add(789);
   list.add(345);
   list.add(30);
-  list.addAtIndex(1, 10);
+  list.addAtIndex(0, 10);
   std::cout << list << std::endl;
   std::cout << "Size: " << list.getSize() << std::endl;
-  list.removeAtIndex(3);
+  list.removeAtIndex(0);
   list.remove(345);
   std::cout << list << std::endl;
   std::cout << "Size: " << list.getSize() << std::endl;

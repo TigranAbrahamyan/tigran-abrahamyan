@@ -3,8 +3,6 @@
 
 #include <iostream>
 
-using namespace std;
-
 template<typename T>
 struct Node {
   T _data;
@@ -35,6 +33,7 @@ class LinkedList {
     Node<T>* getNodeByIndex(int);
     T getNodeDataByIndex(int);
     int getSize() const;
+    bool isEmpty();
 
     template<typename Out>
     friend std::ostream& operator<<(std::ostream&, const LinkedList<Out>&);
@@ -71,15 +70,18 @@ void LinkedList<T>::add(T data) {
 template<typename T>
 void LinkedList<T>::addAtIndex(int index, T data) {
   if (index < 0 || index > _size) {
-    throw runtime_error("Index out of range");
+    throw std::runtime_error("Index out of range");
   }
 
+  Node<T>* node = new Node<T>(data);
+
   if (index == 0) {
-    add(data);
+    node->_next = _head;
+    _head = node;
   } else {
     Node<T>* current = getNodeByIndex(index - 1);
-    Node<T>* newNode = new Node<T>(data, current->_next);
-    current->_next = newNode;
+    node->_next = current->_next;
+    current->_next = node;
     _size++;
   }
 }
@@ -87,7 +89,7 @@ void LinkedList<T>::addAtIndex(int index, T data) {
 template<typename T>
 void LinkedList<T>::remove(T data) {
   if (!_head) {
-    throw runtime_error("Head is null");
+    throw std::runtime_error("Head is null");
   }
 
   Node<T>* current = _head;
@@ -110,18 +112,26 @@ void LinkedList<T>::remove(T data) {
       _tail = current;
     }
   } else {
-    throw runtime_error("Element not found");
+    throw std::runtime_error("Element not found");
   }
 }
 
 template<typename T>
 void LinkedList<T>::removeAtIndex(int index) {
-  Node<T>* prev = getNodeByIndex(index - 1);
-  prev->_next = prev->_next->_next;
-  _size--;
+  if (index == 0) {
+    _head = _head->_next;
 
-  if (index == _size) {
-    _tail = prev;
+    if (!_head) {
+      _tail = NULL;
+    }
+  } else {
+    Node<T>* prev = getNodeByIndex(index - 1);
+    prev->_next = prev->_next->_next;
+    _size--;
+
+    if (index == _size) {
+      _tail = prev;
+    }
   }
 }
 
@@ -138,11 +148,11 @@ void LinkedList<T>::removeAll() {
 template<typename T>
 Node<T>* LinkedList<T>::getNodeByIndex(int index) {
   if (!_head) {
-    throw runtime_error("Head is null");
+    throw std::runtime_error("Head is null");
   }
 
   if (index < 0 || index > _size) {
-    throw runtime_error("Index out of range");
+    throw std::runtime_error("Index out of range");
   }
 
   Node<T>* current = _head;
@@ -168,6 +178,11 @@ T LinkedList<T>::getNodeDataByIndex(int index) {
 template<typename T>
 int LinkedList<T>::getSize() const {
   return _size;
+}
+
+template<typename T>
+bool LinkedList<T>::isEmpty() {
+  return getSize() == 0;
 }
 
 template<typename T>
