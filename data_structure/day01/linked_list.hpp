@@ -61,7 +61,7 @@ void LinkedList<T>::add(T data) {
     _head = _tail = node;
   } else {
     _tail->_next = node;
-    _tail = node;
+    _tail = _tail->_next;
   }
 
 	_size++;

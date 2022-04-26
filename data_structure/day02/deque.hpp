@@ -21,36 +21,36 @@ class Deque {
 
 template<typename T>
 void Deque<T>::pushFront(T data) {
-  _list.add(data);
-}
-
-template<typename T>
-T Deque<T>::popFront() {
-  T last = getLast();
-  _list.removeAtIndex(_list.getSize());
-  return last;
-}
-
-template<typename T>
-void Deque<T>::pushBack(T data) {
   _list.addAtIndex(0, data);
 }
 
 template<typename T>
-T Deque<T>::popBack() {
+T Deque<T>::popFront() {
   T first = getFirst();
   _list.removeAtIndex(0);
   return first;
 }
 
 template<typename T>
+void Deque<T>::pushBack(T data) {
+  _list.add(data);
+}
+
+template<typename T>
+T Deque<T>::popBack() {
+  T last = getLast();
+  _list.removeAtIndex(_list.getSize() - 1);
+  return last;
+}
+
+template<typename T>
 T Deque<T>::getLast() {
-  return _list.getNodeDataByIndex(_list.getSize());
+  return _list.getDataByIndex(_list.getSize() - 1);
 }
 
 template<typename T>
 T Deque<T>::getFirst() {
-  return _list.getNodeDataByIndex(0);
+  return _list.getDataByIndex(0);
 }
 
 #endif
