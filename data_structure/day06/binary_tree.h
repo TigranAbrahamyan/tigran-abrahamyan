@@ -1,5 +1,5 @@
-#ifndef TREE_H
-#define TREE_H
+#ifndef BINARY_TREE_H
+#define BINARY_TREE_H
 
 #include <iostream>
 #include <queue>
@@ -39,6 +39,7 @@ Tree::Tree(int value) {
 
 void Tree::insert(int value) {
   if (!root) {
+    root = new Node(value);
     return;
   }
 

@@ -1,7 +1,4 @@
-#include <iostream>
 #include "./binary_tree.h"
-
-using namespace std;
 
 int main() {
   Tree* root = new Tree(1);
