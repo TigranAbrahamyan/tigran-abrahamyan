@@ -25,7 +25,7 @@ class Graph {
     bool isConnected(int, int);
     void nodeNeighbours(int);
     void nodeConnections(int);
-  };
+};
 
 Graph::Graph(int size) {
   for (int i = 0; i < size; i++) {
@@ -121,10 +121,8 @@ void Graph::nodeConnections(int vertex) {
   outOfRangeException(vertex);
   cout << "Connections of " << vertex << ": ";
   for (int i = 0; i < adjMatrix.size(); i++) {
-    for (int j = 0; j < adjMatrix.size(); j++) {
-      if (adjMatrix[i][j] == 1 && j == vertex) {
-        cout << i << " ";
-      }
+    if (adjMatrix[i][vertex] == 1) {
+      cout << i << " ";
     }
   }
   cout << endl;
