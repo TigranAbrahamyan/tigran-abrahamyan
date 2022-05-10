@@ -20,7 +20,6 @@ class LinkedList {
     Node<T>* _head;
     Node<T>* _tail;
     int _size;
-    Node<T>* getNodeByIndex(int);
 
   public:
     LinkedList();
@@ -31,6 +30,8 @@ class LinkedList {
     void remove(T);
     void removeAtIndex(int);
     void removeAll();
+    Node<T>* findNode(T);
+    Node<T>* getNodeByIndex(int);
     T getDataByIndex(int);
     int getSize() const;
     bool isEmpty();
@@ -98,6 +99,12 @@ void LinkedList<T>::remove(T data) {
   }
 
   Node<T>* current = _head;
+
+  if (current->_data == data) {
+    removeAtIndex(0);
+    return;
+  }
+
   bool isFound = false;
 
   while (current != NULL && !isFound) {
@@ -151,6 +158,21 @@ void LinkedList<T>::removeAll() {
 }
 
 template<typename T>
+Node<T>* LinkedList<T>::findNode(T data) {
+  if (_head == NULL) {
+    throw std::runtime_error("Head is null");
+  }
+
+  Node<T>* current = _head;
+
+  while (current && current->_data != data) {
+    current = current->_next;
+  }
+
+  return current;
+}
+
+template<typename T>
 Node<T>* LinkedList<T>::getNodeByIndex(int index) {
   if (_head == NULL) {
     throw std::runtime_error("Head is null");
@@ -201,6 +223,7 @@ std::ostream& operator<<(std::ostream &out, const LinkedList<T>& list) {
     current = current->_next;
   }
   out << "]";
+  out << std::endl;
 
   return out;
 }
