@@ -12,6 +12,7 @@ class Graph {
     vector<vector<int>> adjMatrix;
 
     void outOfRangeException(int);
+    void dfs(bool*, int);
 
   public:
     Graph(int);
@@ -39,6 +40,15 @@ Graph::Graph(int size) {
 void Graph::outOfRangeException(int index) {
   if (index > adjMatrix.size() || index < 0) {
     throw invalid_argument("Argument is out of range.");
+  }
+}
+
+void Graph::dfs(bool *isVisited, int vertex) {
+  isVisited[vertex] = true;
+  for (int i = 0; i < adjMatrix.size(); i++) {
+    if (!isVisited[i] && adjMatrix[vertex][i]) {
+      dfs(isVisited, i);
+    }
   }
 }
 
@@ -119,13 +129,20 @@ void Graph::nodeNeighbours(int vertex) {
 
 void Graph::nodeConnections(int vertex) {
   outOfRangeException(vertex);
+
   cout << "Connections of " << vertex << ": ";
+  bool* isVisited = new bool[adjMatrix.size()];
   for (int i = 0; i < adjMatrix.size(); i++) {
-    if (adjMatrix[i][vertex] == 1) {
+    isVisited[i] = false;
+  }
+
+  dfs(isVisited, vertex);
+
+  for (int i = 0; i < adjMatrix.size(); i++) {
+    if (isVisited[i]) {
       cout << i << " ";
     }
   }
-  cout << endl;
 }
 
 #endif

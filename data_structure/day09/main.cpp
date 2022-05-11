@@ -1,14 +1,11 @@
 #include "graph.hpp"
 
 int main() {
-  srand(time(0));
-
   int size;
   cout << "Size: ";
   cin >> size;
 
   Graph *graph = new Graph(size);
-
   graph->printMatrix();
   graph->addDirectionalEdge(1, 2);
   graph->addDirectionalEdge(3, 4);
