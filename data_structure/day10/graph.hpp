@@ -17,7 +17,6 @@ class Graph {
 
   public:
     Graph();
-    ~Graph();
     int getSize() const;
     void printList();
     void addNode();
@@ -32,11 +31,6 @@ class Graph {
 Graph::Graph() {
   _size = 0;
   _adjList = new LinkedList<int>[_size];
-}
-
-Graph::~Graph() {
-  _size = 0;
-  delete[] _adjList;
 }
 
 void Graph::outOfRangeException(int index) {
