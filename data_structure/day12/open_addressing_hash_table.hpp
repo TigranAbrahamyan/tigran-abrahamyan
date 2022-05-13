@@ -25,8 +25,8 @@ class HashTable {
     int _capacity;
 
     int hashFunction(string);
-    void resizeMultiply();
-    void resizeDivide();
+    void resize();
+    void rehash();
     int getLastPosition();
 
   public:
@@ -56,7 +56,7 @@ int HashTable::hashFunction(string key) {
   return result % _capacity;
 }
 
-void HashTable::resizeMultiply() {
+void HashTable::resize() {
   _capacity *= 2;
   Table** temp = new Table*[_capacity];
 
@@ -71,7 +71,7 @@ void HashTable::resizeMultiply() {
   _table = temp;
 }
 
-void HashTable::resizeDivide() {
+void HashTable::rehash() {
   _capacity /= 2;
   Table** temp = new Table*[_capacity];
 
@@ -103,7 +103,7 @@ void HashTable::insert(string key, string value) {
     while (_table[position]) {
       position++;
       if (position >= _capacity) {
-        resizeMultiply();
+        resize();
       }
     }
 
@@ -124,7 +124,7 @@ void HashTable::remove(string key) {
   }
 
   if (getLastPosition() < _capacity / 2 && _capacity != DEFAULT_CAPACITY) {
-    resizeDivide();
+    rehash();
   }
 }
 
