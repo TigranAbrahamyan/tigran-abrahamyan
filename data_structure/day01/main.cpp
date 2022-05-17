@@ -1,4 +1,3 @@
-#include <iostream>
 #include "./linked_list.hpp"
 
 int main() {
@@ -14,15 +13,21 @@ int main() {
   list.add(90);
   list.addAtIndex(0, 10);
   list.add(1005);
-  std::cout << list << std::endl;
   std::cout << "Size: " << list.getSize() << std::endl;
+  std::cout << list << std::endl;
   list.removeAtIndex(0);
   list.removeAtIndex(5);
   list.remove(30);
   list.remove(345);
   list.removeAtIndex(1);
-  std::cout << list << std::endl;
   std::cout << "Size: " << list.getSize() << std::endl;
+  std::cout << list << std::endl;
+  list.removeHead();
+  std::cout << "Size: " << list.getSize() << std::endl;
+  std::cout << list << std::endl;
+  list.removeTail();
+  std::cout << "Size: " << list.getSize() << std::endl;
+  std::cout << list << std::endl;
 
   return 0;
 }

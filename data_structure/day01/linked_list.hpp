@@ -27,6 +27,8 @@ class LinkedList {
 
     void add(T);
     void addAtIndex(int, T);
+    void removeHead();
+    void removeTail();
     void remove(T);
     void removeAtIndex(int);
     void removeAll();
@@ -58,7 +60,7 @@ template<typename T>
 void LinkedList<T>::add(T data) {
   Node<T>* node = new Node<T>(data);
 
-  if (_head == NULL) {
+  if (!_head) {
     _head = _tail = node;
   } else {
     _tail->_next = node;
@@ -85,7 +87,7 @@ void LinkedList<T>::addAtIndex(int index, T data) {
     prev->_next = node;
   }
 
-  if (_tail == NULL) {
+  if (!_tail) {
     _tail = node;
   }
 
@@ -93,73 +95,96 @@ void LinkedList<T>::addAtIndex(int index, T data) {
 }
 
 template<typename T>
-void LinkedList<T>::remove(T data) {
-  if (_head == NULL) {
+void LinkedList<T>::removeHead() {
+  if (!_head) {
     throw std::runtime_error("Head is null");
   }
 
-  Node<T>* current = _head;
+  Node<T>* temp = _head;
+  _head = _head->_next;
+  _size--;
+  delete temp;
 
-  if (current->_data == data) {
-    removeAtIndex(0);
-    return;
+  if (!_head) {
+    _tail = NULL;
+  }
+}
+
+template<typename T>
+void LinkedList<T>::removeTail() {
+  if (!_head) {
+    throw std::runtime_error("List is null");
   }
 
-  bool isFound = false;
+  removeAtIndex(_size - 1);
+}
 
-  while (current != NULL && !isFound) {
-    if (current->_next->_data == data) {
-      if (_tail->_data == data) {
-        _tail = current;
-      }
-
-      isFound = true;
-      Node<T>* temp = current->_next;
-      current->_next = current->_next->_next;
-      delete temp;
-    } else {
-      current = current->_next;
-    }
+template<typename T>
+void LinkedList<T>::remove(T data) {
+  if (!_head) {
+    throw std::runtime_error("Head is null");
   }
 
-  if (isFound) {
-    _size--;
+  if (_head->_data == data) {
+    removeHead();
   } else {
-    throw std::runtime_error("Element not found");
+    Node<T>* current = _head;
+    bool isFound = false;
+
+    while (current && !isFound) {
+      if (current->_next->_data == data) {
+        if (_tail->_data == data) {
+          _tail = current;
+        }
+
+        isFound = true;
+        Node<T>* temp = current->_next;
+        current->_next = current->_next->_next;
+        delete temp;
+      } else {
+        current = current->_next;
+      }
+    }
+
+    if (isFound) {
+      _size--;
+    } else {
+      throw std::runtime_error("Element not found");
+    }
   }
 }
 
 template<typename T>
 void LinkedList<T>::removeAtIndex(int index) {
-  Node<T>* temp = _head;
+  if (!_head) {
+    throw std::runtime_error("Head is null");
+  }
 
   if (index == 0) {
-    _head = _head->_next;
-    delete temp;
+    removeHead();
   } else {
     Node<T>* prev = getNodeByIndex(index - 1);
-    temp = prev->_next;
+    Node<T>* temp = prev->_next;
     prev->_next = prev->_next->_next;
     delete temp;
+    _size--;
 
     if (index == _size) {
       _tail = prev;
     }
   }
-
-  _size--;
 }
 
 template<typename T>
 void LinkedList<T>::removeAll() {
-  while (_size - 1 > 0) {
-    removeAtIndex(_size);
+  while (_size) {
+    removeHead();
   }
 }
 
 template<typename T>
 Node<T>* LinkedList<T>::findNode(T data) {
-  if (_head == NULL) {
+  if (!_head) {
     throw std::runtime_error("Head is null");
   }
 
@@ -174,7 +199,7 @@ Node<T>* LinkedList<T>::findNode(T data) {
 
 template<typename T>
 Node<T>* LinkedList<T>::getNodeByIndex(int index) {
-  if (_head == NULL) {
+  if (!_head) {
     throw std::runtime_error("Head is null");
   }
 
@@ -205,7 +230,7 @@ int LinkedList<T>::getSize() const {
 
 template<typename T>
 bool LinkedList<T>::isEmpty() {
-  return getSize() == 0;
+  return _size == 0;
 }
 
 template<typename T>
