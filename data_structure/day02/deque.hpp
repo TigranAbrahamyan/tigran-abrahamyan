@@ -17,6 +17,8 @@ class Deque {
 
     T getLast();
     T getFirst();
+
+    bool isEmpty();
 };
 
 template<typename T>
@@ -51,6 +53,11 @@ T Deque<T>::getLast() {
 template<typename T>
 T Deque<T>::getFirst() {
   return _list.getDataByIndex(0);
+}
+
+template<typename T>
+bool Deque<T>::isEmpty() {
+  return _list.isEmpty();
 }
 
 #endif
