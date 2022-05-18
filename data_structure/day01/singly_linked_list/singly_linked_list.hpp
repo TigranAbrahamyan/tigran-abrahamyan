@@ -1,5 +1,5 @@
-#ifndef LINKED_LIST_H
-#define LINKED_LIST_H
+#ifndef SINGLY_LINKED_LIST_H
+#define SINGLY_LINKED_LIST_H
 
 #include <iostream>
 
@@ -15,15 +15,15 @@ struct Node {
 };
 
 template<typename T>
-class LinkedList {
+class SinglyLinkedList {
   private:
     Node<T>* _head;
     Node<T>* _tail;
     int _size;
 
   public:
-    LinkedList();
-    ~LinkedList();
+    SinglyLinkedList();
+    ~SinglyLinkedList();
 
     void add(T);
     void addAtIndex(int, T);
@@ -39,41 +39,42 @@ class LinkedList {
     bool isEmpty();
 
     template<typename Out>
-    friend std::ostream& operator<<(std::ostream&, const LinkedList<Out>&);
+    friend std::ostream& operator<<(std::ostream&, const SinglyLinkedList<Out>&);
 };
 
 template<typename T>
-LinkedList<T>::LinkedList() {
+SinglyLinkedList<T>::SinglyLinkedList() {
   _head = NULL;
   _tail = NULL;
   _size = 0;
 }
 
 template<typename T>
-LinkedList<T>::~LinkedList() {
+SinglyLinkedList<T>::~SinglyLinkedList() {
   removeAll();
   _head = NULL;
   _tail = NULL;
 }
 
 template<typename T>
-void LinkedList<T>::add(T data) {
+void SinglyLinkedList<T>::add(T data) {
   Node<T>* node = new Node<T>(data);
 
   if (!_head) {
-    _head = _tail = node;
+    _head = node;
+    _tail = node;
   } else {
     _tail->_next = node;
     _tail = _tail->_next;
   }
 
-	_size++;
+  _size++;
 }
 
 template<typename T>
-void LinkedList<T>::addAtIndex(int index, T data) {
+void SinglyLinkedList<T>::addAtIndex(int index, T data) {
   if (index < 0 || index > _size) {
-    throw std::runtime_error("Index out of range");
+    throw std::invalid_argument("Index out of range");
   }
 
   Node<T>* node = new Node<T>(data);
@@ -91,11 +92,11 @@ void LinkedList<T>::addAtIndex(int index, T data) {
     _tail = node;
   }
 
-	_size++;
+  _size++;
 }
 
 template<typename T>
-void LinkedList<T>::removeHead() {
+void SinglyLinkedList<T>::removeHead() {
   if (!_head) {
     throw std::runtime_error("Head is null");
   }
@@ -111,7 +112,7 @@ void LinkedList<T>::removeHead() {
 }
 
 template<typename T>
-void LinkedList<T>::removeTail() {
+void SinglyLinkedList<T>::removeTail() {
   if (!_head) {
     throw std::runtime_error("List is null");
   }
@@ -120,7 +121,7 @@ void LinkedList<T>::removeTail() {
 }
 
 template<typename T>
-void LinkedList<T>::remove(T data) {
+void SinglyLinkedList<T>::remove(T data) {
   if (!_head) {
     throw std::runtime_error("Head is null");
   }
@@ -149,15 +150,15 @@ void LinkedList<T>::remove(T data) {
     if (isFound) {
       _size--;
     } else {
-      throw std::runtime_error("Element not found");
+      throw std::invalid_argument("Element not found");
     }
   }
 }
 
 template<typename T>
-void LinkedList<T>::removeAtIndex(int index) {
+void SinglyLinkedList<T>::removeAtIndex(int index) {
   if (!_head) {
-    throw std::runtime_error("Head is null");
+    throw std::invalid_argument("Head is null");
   }
 
   if (index == 0) {
@@ -166,8 +167,8 @@ void LinkedList<T>::removeAtIndex(int index) {
     Node<T>* prev = getNodeByIndex(index - 1);
     Node<T>* temp = prev->_next;
     prev->_next = prev->_next->_next;
-    delete temp;
     _size--;
+    delete temp;
 
     if (index == _size) {
       _tail = prev;
@@ -176,14 +177,14 @@ void LinkedList<T>::removeAtIndex(int index) {
 }
 
 template<typename T>
-void LinkedList<T>::removeAll() {
+void SinglyLinkedList<T>::removeAll() {
   while (_size) {
     removeHead();
   }
 }
 
 template<typename T>
-Node<T>* LinkedList<T>::findNode(T data) {
+Node<T>* SinglyLinkedList<T>::findNode(T data) {
   if (!_head) {
     throw std::runtime_error("Head is null");
   }
@@ -198,13 +199,13 @@ Node<T>* LinkedList<T>::findNode(T data) {
 }
 
 template<typename T>
-Node<T>* LinkedList<T>::getNodeByIndex(int index) {
+Node<T>* SinglyLinkedList<T>::getNodeByIndex(int index) {
   if (!_head) {
     throw std::runtime_error("Head is null");
   }
 
   if (index < 0 || index > _size) {
-    throw std::runtime_error("Index out of range");
+    throw std::invalid_argument("Index out of range");
   }
 
   Node<T>* current = _head;
@@ -219,22 +220,22 @@ Node<T>* LinkedList<T>::getNodeByIndex(int index) {
 }
 
 template<typename T>
-T LinkedList<T>::getDataByIndex(int index) {
+T SinglyLinkedList<T>::getDataByIndex(int index) {
   return getNodeByIndex(index)->_data;
 }
 
 template<typename T>
-int LinkedList<T>::getSize() const {
+int SinglyLinkedList<T>::getSize() const {
   return _size;
 }
 
 template<typename T>
-bool LinkedList<T>::isEmpty() {
+bool SinglyLinkedList<T>::isEmpty() {
   return _size == 0;
 }
 
 template<typename T>
-std::ostream& operator<<(std::ostream &out, const LinkedList<T>& list) {
+std::ostream& operator<<(std::ostream &out, const SinglyLinkedList<T>& list) {
   Node<T>* current = list._head;
 
   out << "[";

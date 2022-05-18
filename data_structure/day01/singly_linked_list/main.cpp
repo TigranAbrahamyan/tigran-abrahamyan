@@ -1,7 +1,7 @@
-#include "./linked_list.hpp"
+#include "./singly_linked_list.hpp"
 
 int main() {
-  LinkedList<int> list;
+  SinglyLinkedList<int> list;
   list.add(5);
   list.add(20);
   list.add(789);
@@ -20,6 +20,8 @@ int main() {
   list.remove(30);
   list.remove(345);
   list.removeAtIndex(1);
+  list.removeAtIndex(list.getSize() - 1);
+  list.removeAtIndex(list.getSize() - 1);
   std::cout << "Size: " << list.getSize() << std::endl;
   std::cout << list << std::endl;
   list.removeHead();
