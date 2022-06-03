@@ -1,0 +1,26 @@
+db.school.insertOne({ name: "1 dproc", address: "Tumanyan 60", studentsCount: 600, coordinates: [39.823281, 46.752064], director: "Poxos Poxosyan", status: "mijnakarg"});
+db.school.insertOne({ name: "2 dproc", address: "Parsegov 02", studentsCount: 300, coordinates: [39.826814, 46.761187], director: "Petros Petrosyan", status: "mijnakarg"});
+db.school.insertOne({ name: "3 dproc", address: "Azatamartikneri 04", studentsCount: 320, coordinates: [39.818679, 46.754824], director: "Petros Poxosyan", status: "mijnakarg" });
+db.school.insertOne({ name: "7 dproc", address: "Azatamartikneri 20", studentsCount: 200, coordinates: [39.820024, 46.756824], director: "Poxos Petrosyan", status: "mijnakarg" });
+db.school.insertOne({ name: "8 dproc", address: "Vardan Mamikonyan 20", studentsCount: 250, coordinates: [39.813717, 46.752294], director: "Poxos Petrosyan", status: "avag" });
+db.school.insertOne({ name: "11 dproc", address: "Vardan Mamikonyan 56", studentsCount: 350, coordinates: [39.827640, 46.767677], director: "Poxos Petrosyan", status: "avag" });
+
+1) db.school.find();
+2) db.school.find({}, { name: 1, address: 1, _id: 0 });
+3) db.school.find().sort({ studentsCount: 1 });
+4) db.school.find({ status: "avag" }, { _id: 0 });
+5) db.school.find({ status: "mijnakarg" }, { _id: 0 }).limit(3);
+6)
+db.school.createIndex({ coordinates: "2dsphere" });
+
+db.school.find({
+  coordinates: {
+    $near: {
+      $geometry: {
+        type: "Point" ,
+        coordinates: [39.828291, 46.757487] // current location example
+      },
+    },
+  },
+})
+  .limit(1); // without limit 1 it will get all nearest coordinates based on my current location
