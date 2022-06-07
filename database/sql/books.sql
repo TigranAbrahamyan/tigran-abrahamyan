@@ -1,0 +1,115 @@
+CREATE DATABASE BOOKS;
+
+CREATE TABLE AUTHOR (
+  Autor_ID INTEGER PRIMARY KEY,
+  Name TEXT NOT NULL,
+  Surname TEXT NOT NULL,
+  BDay DATE NOT NULL,
+  Address Text NOT NULL
+);
+
+CREATE TABLE PUBLISHER (
+  Publisher_ID INTEGER PRIMARY KEY,
+  NAME TEXT NOT NULL
+);
+
+CREATE TABLE BOOK (
+  Book_ID INTEGER PRIMARY KEY,
+  Book_Title TEXT NOT NULL,
+  Pub_date DATE NOT NULL,
+  Autor_ID INTEGER NOT NULL,
+  Publisher_ID INTEGER NOT NULL,
+  CONSTRAINT FK_Book_Author
+  FOREIGN KEY (Autor_ID)
+  REFERENCES AUTHOR(Autor_ID),
+  CONSTRAINT FK_Book_Publisher
+  FOREIGN KEY (Publisher_ID)
+  REFERENCES PUBLISHER(Publisher_ID)
+);
+
+CREATE TABLE SUBSCRIBER (
+  Subscriber_ID INTEGER PRIMARY KEY,
+  Name TEXT NOT NULL,
+  Surname TEXT NOT NULL,
+  BDay DATE NOT NULL,
+  Address TEXT NOT NULL
+);
+
+CREATE TABLE SUBSCRIBER_BOOK (
+  Subscriber_book_ID INTEGER PRIMARY KEY,
+  Subscriber_ID INTEGER NOT NULL,
+  Taken_date DATE NOT NULL,
+  Returned_Date DATE NOT NULL,
+  Deadline_Date DATE NOT NULL,
+  CONSTRAINT FK_Subscriber_book
+  FOREIGN KEY (Subscriber_ID)
+  REFERENCES SUBSCRIBER(Subscriber_ID)
+);
+
+CREATE TABLE BOOK_INVENTORY (
+  Book_Inventory_ID INTEGER PRIMARY KEY,
+  Book_ID INTEGER NOT NULL,
+  Subscriber_book_ID INTEGER NOT NULL,
+  Condiition TEXT NOT NULL,
+  Status TEXT NOT NULL,
+  CONSTRAINT FK_Book_subscribers
+  FOREIGN KEY (Subscriber_book_ID)
+  REFERENCES SUBSCRIBER_BOOK(Subscriber_book_ID),
+  CONSTRAINT FK_BookInventory_Book
+  FOREIGN KEY (Book_ID)
+  REFERENCES BOOK(Book_ID)
+);
+
+INSERT INTO AUTHOR VALUES
+(1, "Hovhannes", "Tumanyan", "1869_02_19", "Yerevan"),
+(2, "Aksel", "Bakunc", "1869_02_14", "Gyumri");
+
+INSERT INTO PUBLISHER VALUES
+(1, "Edit Print"),
+(2, "Krunk");
+
+INSERT INTO BOOK VALUES
+(1, "Shunn u katun", "2000_02_01", 2, 2),
+(2, "Krunk", "2001_03_01", 1, 1);
+
+INSERT INTO SUBSCRIBER VALUES
+(1, "Arthur", "Khachatryan", "2000_12_02", "Yerevan"),
+(2, "Anna", "Arushanyan", "2002_02_02", "Stepanakert");
+
+INSERT INTO SUBSCRIBER_BOOK VALUES
+(1, 1, "2012_11_20", "2012_12_31", "2012_11_30"),
+(2, 2, "2015_01_01", "2015_05_02", "2015_03_03");
+
+INSERT INTO BOOK_INVENTORY VALUES
+(1, 1, 1, "TEXT", "REPAIR"),
+(2, 2, 2, "TEXT", "TEXT");
+
+-- VIEW 1
+CREATE VIEW Book_of_subscribers AS
+SELECT
+	Book_Title,
+  Name,
+  Surname,
+  COUNT(IF(Returned_Date > Deadline_Date, 1, NULL)) AS Delays_Count
+FROM BOOK_INVENTORY
+INNER JOIN BOOK USING (Book_ID)
+INNER JOIN SUBSCRIBER_BOOK USING (Subscriber_book_ID)
+INNER JOIN SUBSCRIBER USING (Subscriber_ID)
+GROUP BY Book_Title, Name, Surname;
+
+SELECT * FROM Book_of_subscribers;
+
+-- VIEW 2
+CREATE VIEW Books_in_repair AS
+SELECT
+	Book_Title,
+  COUNT(STATUS)
+FROM BOOK_INVENTORY
+INNER JOIN BOOK USING (Book_ID)
+WHERE Status = "REPAIR"
+GROUP BY Book_Title;
+
+SELECT * FROM Books_in_repair;
+
+SELECT * FROM SUBSCRIBER;
+SELECT * FROM BOOK_INVENTORY;
