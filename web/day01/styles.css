@@ -1,0 +1,146 @@
+* {
+  font-family: sans-serif;
+}
+
+body {
+  background-color: #F1F1F1;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.container>div {
+  margin: 15px;
+}
+
+.head>div {
+  display: inline-block;
+}
+
+.head>div>img {
+  border-radius: 50px;
+  width: 280px;
+  height: 300px;
+  box-shadow: 10px 10px 55px -25px black;
+}
+
+.head_info {
+  min-width: 400px;
+  padding: 20px;
+  margin-top: 20px;
+  vertical-align: top;
+}
+
+.head_info>div>a {
+  color: gray;
+  text-decoration: none;
+}
+
+.head_info__description {
+  font-style: oblique;
+  font-weight: bold;
+  color: gray;
+}
+
+.head_info__social_networks {
+  font-weight: bold;
+}
+
+.my_hobbies,
+.work_experience,
+.portfolio {
+  min-width: 400px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.my_hobbies>ol {
+  padding-left: 18px;
+  color: gray;
+}
+
+.my_hobbies>ol>li {
+  margin-bottom: 8px;
+}
+
+.work_experience>table {
+  width: 100%;
+  text-align: left;
+}
+
+.work_experience th,
+.work_experience td {
+  padding-bottom: 10px;
+}
+
+.work_experience td {
+  color: gray;
+}
+
+.work_experience__company_name {
+  color: black !important;
+}
+
+.portfolio>ol {
+  list-style: none;
+  text-align: left;
+  padding-left: 0;
+}
+
+.portfolio>ol>li {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #5d5c5c73;
+}
+
+.contact>h2 {
+  text-align: center;
+}
+
+.contact__form input,
+.contact__form textarea {
+  background-color: #F1F1F1;
+  border: none;
+  border-bottom: 1px solid gray;
+  padding: 15px 0;
+}
+
+.contact__form input:focus,
+.contact__form textarea:focus {
+  outline: none;
+}
+
+.contact__form input {
+  width: calc(750px / 2);
+}
+
+.contact__form textarea {
+  width: -webkit-fill-available;
+}
+
+.contact__form label {
+  color: gray;
+}
+
+.contact__form__name,
+.contact__form__email {
+  display: inline-block;
+}
+
+.contact__form__email {
+  margin-left: 15px;
+}
+
+.contact__form__message {
+  margin-top: 20px;
+}
+
+.contact__form__button {
+  color: white;
+  background-color: black;
+  border: none;
+  padding: 18px 25px;
+  margin-top: 5px;
+}
