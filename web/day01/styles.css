@@ -1,5 +1,7 @@
 * {
   font-family: sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -7,16 +9,22 @@ body {
 }
 
 .container {
+  display: grid;
+  gap: 15px;
   max-width: 800px;
   margin: 0 auto;
 }
 
 .container > div {
-  margin-bottom: 15px;
+  margin: 0 20px;
 }
 
-.head > div {
-  display: inline-block;
+.head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 10px !important;
 }
 
 .head > div > img {
@@ -27,10 +35,8 @@ body {
 }
 
 .head_info {
-  min-width: 400px;
-  padding: 20px;
-  margin-top: 20px;
-  vertical-align: top;
+  display: grid;
+  gap: 15px;
 }
 
 .head_info > div > a {
@@ -51,103 +57,142 @@ body {
 .my_hobbies,
 .work_experience,
 .portfolio {
-  min-width: 400px;
   background-color: white;
   border-radius: 20px;
-  padding: 20px;
+  padding: 25px;
+}
+
+.my_hobbies {
+  display: grid;
+  gap: 15px;
 }
 
 .my_hobbies > ol {
+  display: grid;
+  gap: 15px;
   padding-left: 18px;
   color: gray;
 }
 
-.my_hobbies > ol > li {
-  margin-bottom: 8px;
+.work_experience {
+  display: grid;
+  gap: 15px;
 }
 
-.work_experience > table {
-  width: 100%;
-  text-align: left;
+.work_experience__info {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
-.work_experience th,
-.work_experience td {
-  padding-bottom: 10px;
+.work_experience__info div {
+  display: grid;
+  gap: 15px;
 }
 
-.work_experience td {
+.work_experience__info div span {
+  font-weight: bold;
+}
+
+.work_experience__info div p {
   color: gray;
 }
 
-.work_experience > table > tbody > tr > td:first-child {
+.work_experience__info div:first-child p {
   color: black;
 }
 
+.work_experience__info div:last-child {
+  margin-right: 70px;
+}
+
+.portfolio {
+  display: grid;
+  gap: 15px;
+}
+
 .portfolio > ol {
+  display: grid;
+  gap: 15px;
   list-style: none;
-  text-align: left;
   padding-left: 0;
 }
 
 .portfolio > ol > li {
-  margin-bottom: 15px;
   border-bottom: 1px solid #5d5c5c73;
 }
 
-.contact > h2 {
+.contact {
+  display: grid;
+  gap: 15px;
+}
+
+.contact h2 {
   text-align: center;
+}
+
+.contact__form {
+  display: grid;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.contact__form__name-email {
+  display: flex;
+  gap: 15px;
+}
+
+.contact__form__name-email div {
+  width: 100%;
 }
 
 .contact__form input,
 .contact__form textarea {
   background-color: unset;
   border: none;
+  outline: none;
   border-bottom: 1px solid gray;
   padding: 15px 0;
-}
-
-.contact__form input:focus,
-.contact__form textarea:focus {
-  outline: none;
-}
-
-.contact__form input {
-  width: calc(780px / 2);
+  width: 100%;
 }
 
 .contact__form textarea {
   resize: vertical;
-  width: -webkit-fill-available;
 }
 
 .contact__form label {
   color: gray;
 }
 
-.contact__form__name,
-.contact__form__email {
-  display: inline-block;
-}
-
-.contact__form__email {
-  margin-left: 15px;
-}
-
-.contact__form__message {
-  margin-top: 20px;
-}
-
-.contact__form__button {
+.contact__form button {
   color: white;
   background-color: black;
   border: none;
-  padding: 18px 25px;
+  width: 120px;
+  padding: 15px 0;
   margin-top: 5px;
 }
 
-.contact__form__button:hover {
+.contact__form button:hover {
   cursor: pointer;
   background-color: gray;
   transition: 0.3s;
+}
+
+@media (max-width: 800px) {
+  .years {
+    margin: 0;
+  }
+
+  .contact__form__name-email {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 420px) {
+  .work_experience__info {
+    flex-direction: column;
+  }
 }

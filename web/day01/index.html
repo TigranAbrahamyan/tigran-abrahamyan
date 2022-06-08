@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css">
   <title>CV</title>
 </head>
 <body>
@@ -39,37 +39,29 @@
     </div>
     <div class="work_experience">
       <h2>Work experience</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Company</th>
-            <th>Position</th>
-            <th>Years</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Activision Blizzard</td>
-            <td>Product Manager</td>
-            <td>2012-2016</td>
-          </tr>
-          <tr>
-            <td>Ubisoft</td>
-            <td>Game Designer</td>
-            <td>2016-2017</td>
-          </tr>
-          <tr>
-            <td>eBay</td>
-            <td>Lead Frontend</td>
-            <td>2017-2019</td>
-          </tr>
-          <tr>
-            <td>Yandex</td>
-            <td>DevOps engineer</td>
-            <td>2019-now</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="work_experience__info">
+        <div>
+          <span>Company</span>
+          <p>Activision Blizzard</p>
+          <p>Ubisoft</p>
+          <p>eBay</p>
+          <p>Yandex</p>
+        </div>
+        <div>
+          <span>Position</span>
+          <p>Product Manager</p>
+          <p>Game Designer</p>
+          <p>Lead Frontend</p>
+          <p>DevOps engineer</p>
+        </div>
+        <div>
+          <span>Years</span>
+          <p>2012 - 2016</p>
+          <p>2016 - 2017</p>
+          <p>2017 - 2019</p>
+          <p>2019 - now</p>
+        </div>
+      </div>
     </div>
     <div class="portfolio">
       <h2>Portfolio</h2>
@@ -82,21 +74,21 @@
     <div class="contact">
       <h2>Contact me</h2>
       <form class="contact__form">
-        <div>
-          <div class="contact__form__name">
+        <div class="contact__form__name-email">
+          <div>
             <label for="name">Name:</label><br>
             <input type="text" id="name" placeholder="Type your name...">
           </div>
-          <div class="contact__form__email">
+          <div>
             <label for="email">Email:</label><br>
             <input type="text" id="email" placeholder="Type your email...">
           </div>
         </div>
-        <div class="contact__form__message">
+        <div>
           <label for="message">Message:</label><br>
           <textarea id="message"></textarea>
         </div>
-        <button class="contact__form__button">Contact!</button>
+        <button>Contact!</button>
       </form>
     </div>
   </div>
