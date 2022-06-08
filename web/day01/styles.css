@@ -11,15 +11,15 @@ body {
   margin: 0 auto;
 }
 
-.container>div {
-  margin: 15px;
+.container > div {
+  margin-bottom: 15px;
 }
 
-.head>div {
+.head > div {
   display: inline-block;
 }
 
-.head>div>img {
+.head > div > img {
   border-radius: 50px;
   width: 280px;
   height: 300px;
@@ -33,7 +33,7 @@ body {
   vertical-align: top;
 }
 
-.head_info>div>a {
+.head_info > div > a {
   color: gray;
   text-decoration: none;
 }
@@ -57,16 +57,16 @@ body {
   padding: 20px;
 }
 
-.my_hobbies>ol {
+.my_hobbies > ol {
   padding-left: 18px;
   color: gray;
 }
 
-.my_hobbies>ol>li {
+.my_hobbies > ol > li {
   margin-bottom: 8px;
 }
 
-.work_experience>table {
+.work_experience > table {
   width: 100%;
   text-align: left;
 }
@@ -80,28 +80,28 @@ body {
   color: gray;
 }
 
-.work_experience__company_name {
-  color: black !important;
+.work_experience > table > tbody > tr > td:first-child {
+  color: black;
 }
 
-.portfolio>ol {
+.portfolio > ol {
   list-style: none;
   text-align: left;
   padding-left: 0;
 }
 
-.portfolio>ol>li {
+.portfolio > ol > li {
   margin-bottom: 15px;
   border-bottom: 1px solid #5d5c5c73;
 }
 
-.contact>h2 {
+.contact > h2 {
   text-align: center;
 }
 
 .contact__form input,
 .contact__form textarea {
-  background-color: #F1F1F1;
+  background-color: unset;
   border: none;
   border-bottom: 1px solid gray;
   padding: 15px 0;
@@ -113,10 +113,11 @@ body {
 }
 
 .contact__form input {
-  width: calc(750px / 2);
+  width: calc(780px / 2);
 }
 
 .contact__form textarea {
+  resize: vertical;
   width: -webkit-fill-available;
 }
 
@@ -143,4 +144,10 @@ body {
   border: none;
   padding: 18px 25px;
   margin-top: 5px;
+}
+
+.contact__form__button:hover {
+  cursor: pointer;
+  background-color: gray;
+  transition: 0.3s;
 }
