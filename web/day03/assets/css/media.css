@@ -1,0 +1,103 @@
+@media (max-width: 1020px) {
+  main .content {
+    margin: 32px;
+  }
+
+  #about .content {
+    margin: 20px;
+  }
+
+  #about .content img {
+    position: static;
+  }
+
+  #cards {
+    padding: 20px;
+  }
+
+  #cards .content {
+    width: 350px;
+  }
+
+  #cards img {
+    max-width: 350px;
+    height: 200px;
+  }
+
+  #cards li {
+    font-size: 24px;
+  }
+
+  #cards .polygon-1,
+  #cards .polygon-2,
+  #cards .polygon-3 {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  #cards {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 575px) {
+  #cards .content {
+    width: 300px;
+  }
+
+  #cards img {
+    max-width: 300px;
+    height: 200px;
+  }
+
+  #cards ol {
+    padding-left: 30px;
+  }
+
+  #cards li {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  header {
+    padding: 20px;
+    gap: 30px;
+  }
+
+  header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+  }
+
+  header nav a {
+    font-size: 14px;
+  }
+
+  main .content {
+    margin: 16px;
+  }
+
+  main p {
+    font-size: 25px;
+  }
+
+  main p:nth-child(2) {
+    font-size: 85px;
+  }
+
+  #cards .content {
+    width: 250px;
+  }
+
+  #cards img {
+    max-width: 250px;
+    height: 150px;
+  }
+
+  #cards li {
+    font-size: 16px;
+  }
+}
