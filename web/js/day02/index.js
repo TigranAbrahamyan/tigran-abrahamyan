@@ -1,15 +1,22 @@
-// 1 problem
+// 1
 const firstWordUppercase = (sentence) => {
-  const splittedSentence = sentence.split(' ');
+  const startSpaceRegEx = /^\s+/g;
+  const startSpaceLength = (sentence.match(startSpaceRegEx) ?? []).join().length;
+  const splitted = sentence.replace(startSpaceRegEx, '').split(' ');
 
-  return splittedSentence[0].toUpperCase() + ' ' + splittedSentence.slice(1).join(' ');
+  return `${' '.repeat(startSpaceLength)} ${splitted[0].toUpperCase()} ${splitted.slice(1).join(' ')}`;
 };
 
 console.log(firstWordUppercase('Javascript is a programming language'));
-// 1 problem
+console.log(firstWordUppercase(' Javascript is a programming language'));
+console.log(firstWordUppercase('   Javascript is a programming language'));
 
-// 2 problem
+// 2
 const chunkArray = (array, chunkSize) => {
+  if (chunkSize === 0) {
+    return array;
+  }
+
   const chunkedArray = [];
 
   for (let i = 0; i < array.length; i += chunkSize) {
@@ -19,54 +26,39 @@ const chunkArray = (array, chunkSize) => {
   return chunkedArray;
 };
 
+console.log(chunkArray([1, 2, 3, 4], 0));
 console.log(chunkArray([1, 2, 3, 4], 2));
 console.log(chunkArray([1, 2, 3, 4, 5], 4));
 console.log(chunkArray([1, 2, 3, 4, 5, 6, 7, 8], 3));
-// 2 problem
 
-// 3 problem
+// 3
 const sumOfObjectValues = (obj) => {
-  let sum = 0;
-
-  for (const key in obj) {
-    if (!isNaN(obj[key])) {
-      sum += obj[key];
-    }
-  }
-
-  return sum;
+  return Object.values(obj).reduce((acc, n) => acc += (typeof n === 'number' ? n : 0), 0);
 };
 
 console.log(sumOfObjectValues({ a: 10, b: 20, c: 'string', d: 12 }));
-// 3 problem
+console.log(sumOfObjectValues({ a: 10, b: 20, c: '5', d: 12 }));
 
-// 4 problem
+// 4
 const vowelsCount = (str) => {
-  const vowels = 'aeiou';
+  const vowels = 'aeiouAEIOU';
 
   return str.split('').reduce((acc, char) => ((vowels.includes(char) && acc++), acc), 0);
 };
 
 console.log(vowelsCount('Today is the best day of my life'));
-// 4 problem
 
-// 5 problem
+// 5
 const positiveNegativeValuesSum = (array) => {
-  return array.reduce((acc, n) => {
-    if (n > 0) {
-      acc.positive += n;
-    } else {
-      acc.negative += n;
-    }
-
-    return acc;
-  }, { positive: 0, negative: 0 });
+  return array.reduce((acc, n) => (
+    n >= 0 ? acc.positive += n : acc.negative += n,
+    acc
+  ), { positive: 0, negative: 0 });
 };
 
 console.log(positiveNegativeValuesSum([10, -12, 30, -1, -8, 0, 14, -33, 20]));
-// 5 problem
 
-// 6 problem
+// 6
 const data = [
   { id: 1, name: 'Name one', city: 'Stepanakert' },
   { id: 2, name: 'Name one', city: 'Erevan' },
@@ -75,30 +67,17 @@ const data = [
   { id: 5, name: 'Name one', city: 'Erevan' },
 ];
 
-const getUniqueCities = (cities) => {
-  const uniqueCities = [];
-
-  for (let i = 0; i < cities.length; i++) {
-    const isExist = uniqueCities.find(({ city }) => city === cities[i].city);
-    if (!isExist) {
-      uniqueCities.push(cities[i]);
-    }
-  }
-
-  return uniqueCities;
-};
+const getUniqueCities = (data) => [...new Set(data.map(({ city }) => city))];
 
 console.log(getUniqueCities(data));
-// 6 problem
 
-// 7 problem
+// 7
 const anagrams = (strA, strB) => {
   return sortWord(strA) === sortWord(strB);
 };
 
-const sortWord = (word) => word.replace(/[^\w]/g, '').toLowerCase().split('').sort().join('');
+const sortWord = (word) => word.replace(/[^a-zA-Z]/g, '').toLowerCase().split('').sort().join('');
 
 console.log(anagrams('rail safety', 'fairy tales'));
 console.log(anagrams('RAIL! SAFETY!', 'fairy tales'));
 console.log(anagrams('Hi there', 'Bye there'));
-// 7 problem
