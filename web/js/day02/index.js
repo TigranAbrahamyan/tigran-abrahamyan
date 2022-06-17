@@ -13,7 +13,7 @@ console.log(firstWordUppercase('   Javascript is a programming language'));
 
 // 2
 const chunkArray = (array, chunkSize) => {
-  if (chunkSize === 0) {
+  if (chunkSize <= 0) {
     return array;
   }
 
