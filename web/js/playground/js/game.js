@@ -1,78 +1,137 @@
-const nickname = localStorage.getItem('nickname');
-
 const startBtn = document.querySelector('#start');
 const figure = document.querySelector('#figure');
-const gamePlace = document.querySelector('.game-place');
-const circles = document.querySelectorAll('.circles div');
+const gamePlace = document.querySelector('#game-place');
+const circles = document.querySelector('#circles');
 
 const gamePlacePosition = gamePlace.getBoundingClientRect();
-const difference = gamePlacePosition.right - gamePlacePosition.left;
-const randomCircles = [];
+const gamePlaceWidth = gamePlacePosition.right - gamePlacePosition.left;
 
-let margin = 10;
+const nickname = localStorage.getItem('nickname');
+
+let figureMargin = 10;
 let timerInterval;
-let elementInterval;
 let randomCircleInterval;
-let circleRandomAppearInterval;
 
 document.querySelector('#nickname').innerText = nickname;
 
-document.querySelector('#logout').addEventListener('click', function() {
+document.querySelector('#logout').addEventListener('click', () => {
   localStorage.removeItem('nickname');
 });
 
-function elementSlideDown() {
-  elementInterval = setInterval(function() {
-    let circlePos = 0;
-    const randomCircle = circles[Math.floor(Math.random() * circles.length)];
+document.querySelector('#again').addEventListener('click', () => {
+  window.location.reload();
+});
 
-    if (!randomCircles[randomCircle]) {
-      const randomPosition = Math.floor(Math.random() * difference);
-      randomCircle.style.display = 'block';
-      randomCircle.style.marginLeft = `${randomPosition}px`;
-      randomCircles.push(randomCircle);
+const convertTimeToDate = time => {
+  const date = new Date();
+  const [ minutes, seconds, milliseconds ] = time.split(':');
+
+  date.setMinutes(minutes);
+  date.setSeconds(seconds);
+  date.setMilliseconds(milliseconds);
+
+  return date;
+};
+
+const setLeader = () => {
+  const leaders = JSON.parse(localStorage.getItem('leaders')) || [];
+  const findedUser = leaders.find(n => n.nickname === nickname);
+
+  if (!findedUser) {
+    leaders.push({ nickname, time: time.innerText });
+    localStorage.setItem('leaders', JSON.stringify(leaders));
+  } else {
+    const currentTime = convertTimeToDate(time.innerText);
+    const findedUserTime = convertTimeToDate(findedUser.time);
+
+    if (currentTime.getTime() > findedUserTime.getTime()) {
+      const leaderNewGoodTime = leaders.map(n => {
+        if (n.nickname === nickname) {
+          n.time = time.innerText;
+        }
+
+        return n;
+      });
+
+      localStorage.setItem('leaders', JSON.stringify(leaderNewGoodTime));
+    }
+  }
+};
+
+const stopGame = () => {
+  circles.style.display = 'none';
+
+  clearInterval(randomCircleInterval);
+  clearInterval(timerInterval);
+
+  document.removeEventListener('keydown', figureMoving);
+  document.querySelector('[data-target="#exampleModalCenter"]').click();
+  document.querySelector('.modal-body').innerText = `Time: ${time.innerText}`;
+
+  setLeader();
+};
+
+const circlesSlideDown = () => {
+  randomCircleInterval = setInterval(() => {
+    const randomPosition = Math.floor(Math.random() * gamePlaceWidth);
+    const circle = document.createElement('div');
+    circles.append(circle);
+    circle.style.marginLeft = `${randomPosition}px`;
+
+    (() => {
+      let position = 0;
+      const currentCircleInterval = setInterval(() => {
+        position += 10;
+        circle.style.marginTop = `${position}px`;
+
+        const figurePosition = figure.getBoundingClientRect();
+        const circlePosition = circle.getBoundingClientRect();
+        const circleXDiff = circlePosition.x - figurePosition.x;
+
+        if (circleXDiff >= 0 && circleXDiff <= figurePosition.width && circlePosition.y >= figurePosition.y) {
+          stopGame();
+        }
+
+        if (circlePosition.bottom >= gamePlacePosition.bottom) {
+          circles.removeChild(circles.firstChild);
+          clearInterval(currentCircleInterval);
+        }
+      }, 70);
+    })();
+  }, 1000);
+};
+
+const figureMoving = (event) => {
+  if (startBtn.disabled === true) {
+    const figurePosition = figure.getBoundingClientRect();
+
+    if (event.key === 'ArrowLeft') {
+      figureMargin -= 10;
+      figure.style.marginLeft = `${figureMargin}px`;
+    } else if (event.key === 'ArrowRight') {
+      figureMargin += 10;
+      figure.style.marginLeft = `${figureMargin}px`;
     }
 
-    randomCircleInterval = setInterval(function() {
-      circlePos += 10;
-      randomCircle.style.marginTop = `${circlePos}px`;
-      const randomCirclePosition = randomCircle.getBoundingClientRect();
-      const figurePosition = figure.getBoundingClientRect();
+    if (figurePosition.right >= gamePlacePosition.right || figurePosition.left <= gamePlacePosition.left) {
+      stopGame();
+    }
+  }
+};
 
-      const randomCircleLeftDiff = Math.abs(randomCirclePosition.left - figurePosition.left);
-
-      if (randomCircleLeftDiff <= figurePosition.width && randomCirclePosition.top >= figurePosition.top) {
-        console.log('end', randomCircleLeftDiff);
-        clearInterval(elementInterval);
-      }
-
-      if (randomCirclePosition.bottom >= gamePlacePosition.bottom) {
-        randomCircle.style.marginTop = 0;
-        randomCircle.style.display = 'none';
-        randomCircles.pop(randomCircle);
-        clearInterval(randomCircleInterval);
-      }
-    }, 10);
-
-  }, 2000);
-}
-
-startBtn.addEventListener('click', function() {
-  startBtn.innerText = 'Start';
+startBtn.addEventListener('click', () => {
+  circlesSlideDown();
   startBtn.disabled = true;
-  figure.style.margin = 25;
-  margin = 10;
-
   const time = document.querySelector('#time');
   let minutes = 0;
   let seconds = 0;
   let milliseconds = 0;
 
-  timerInterval = setInterval(function() {
-    milliseconds += 100;
-    time.innerText = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}:${milliseconds}`;
+  timerInterval = setInterval(() => {
+    milliseconds += 53;
+    time.innerText = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}:${milliseconds < 100 ? '0' + Math.floor(milliseconds / 10) : Math.floor(milliseconds / 10)}`;
 
-    if (milliseconds >= 900) {
+    if (milliseconds >= 950) {
       seconds++;
       milliseconds = 0;
     }
@@ -81,37 +140,7 @@ startBtn.addEventListener('click', function() {
       minutes++;
       seconds = 0;
     }
-  }, 100);
+  }, 53);
 });
 
-document.addEventListener('keydown', function(event) {
-  if (startBtn.disabled === true) {
-    const figurePosition = figure.getBoundingClientRect();
-
-    if (event.key === 'ArrowLeft') {
-      margin -= 10;
-      figure.style.marginLeft = `${margin}px`;
-    }
-
-    if (event.key === 'ArrowRight') {
-      margin += 10;
-      figure.style.marginLeft = `${margin}px`;
-    }
-
-    if (figurePosition.right >= gamePlacePosition.right) {
-      clearInterval(timerInterval);
-      clearInterval(elementInterval);
-      startBtn.innerText = 'Again';
-      startBtn.disabled = false;
-    }
-
-    if (figurePosition.left <= gamePlacePosition.left) {
-      clearInterval(timerInterval);
-      clearInterval(elementInterval);
-      startBtn.innerText = 'Again';
-      startBtn.disabled = false;
-    }
-  }
-});
-
-elementSlideDown();
+document.addEventListener('keydown', figureMoving);

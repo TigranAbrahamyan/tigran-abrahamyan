@@ -22,7 +22,7 @@
   margin: 0;
 }
 
-.game-place {
+#game-place {
   width: 800px;
   height: 800px;
   border: 2px solid rgba(0, 0, 0, 0.5);
@@ -40,13 +40,18 @@
   position: absolute;
   bottom: 20px;
   left: 25px;
+  transition: 0.1s;
 }
 
-.circles div {
-  display: none;
+#circles div {
   position: absolute;
   width: 25px;
   height: 25px;
   border-radius: 25px;
   background: #4F4F4F;
+  transition: 0.1s;
+}
+
+button[data-target="#exampleModalCenter"] {
+  display: none;
 }
