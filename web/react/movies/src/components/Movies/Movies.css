@@ -9,6 +9,7 @@
 
 .movies__searching-adding {
   display: flex;
+  align-items: center;
   gap: 12px;
   width: 600px;
 }

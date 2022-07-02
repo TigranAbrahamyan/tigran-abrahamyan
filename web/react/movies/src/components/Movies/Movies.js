@@ -13,6 +13,7 @@ export const Movies = ({
   setDescription,
 
   movies,
+  moviesCount,
   modalVisibility,
   addMovie,
   deleteMovie,
@@ -24,6 +25,7 @@ export const Movies = ({
         searchValue={searchValue}
         setSearchValue={setSearchValue}
         handleModalVisibility={handleModalVisibility}
+        moviesCount={moviesCount}
       />
 
       <MovieItems

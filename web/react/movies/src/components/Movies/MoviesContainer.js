@@ -8,9 +8,10 @@ export const MoviesContainer = () => {
   const [ moviesList, setMoviesList ] = React.useState(movies);
   const [ filteredMovies, setFilteredMovies ] = React.useState([]);
   const [ modalVisibility, setModalVisibility ] = React.useState(false);
+  const [ moviesCount, setMoviesCount ] = React.useState(0);
   const [ searchValue, setSearchValue ] = React.useState('');
-  const [ name, setName ] = React.useState('');
   const [ description, setDescription ] = React.useState('');
+  const [ name, setName ] = React.useState('');
 
   React.useEffect(() => {
     const debounceFn = _.debounce(() => {
@@ -24,6 +25,7 @@ export const MoviesContainer = () => {
 
   React.useEffect(() => {
     setFilteredMovies(moviesList);
+    setMoviesCount(moviesList.length);
   }, [ moviesList ]);
 
   const handleModalVisibility = (state) => {
@@ -45,6 +47,7 @@ export const MoviesContainer = () => {
 
   const deleteMovie = (id) => {
     setMoviesList(moviesList.filter((movie) => movie.id !== id));
+    setSearchValue('');
   };
 
   return (
@@ -57,6 +60,7 @@ export const MoviesContainer = () => {
       setDescription={setDescription}
 
       movies={filteredMovies}
+      moviesCount={moviesCount}
       modalVisibility={modalVisibility}
       addMovie={addMovie}
       deleteMovie={deleteMovie}
