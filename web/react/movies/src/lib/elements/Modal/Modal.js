@@ -3,12 +3,8 @@ import './Modal.css';
 
 export const Modal = ({ visibility, onClose, title, children }) => {
   React.useEffect(() => {
-    if (visibility) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  }, [visibility]);
+    document.body.style.overflow = visibility ? 'hidden' : 'auto';
+  }, [ visibility ]);
 
   if (!visibility) {
     return null;

@@ -20,11 +20,11 @@ export const MoviesContainer = () => {
     debounceFn();
 
     return () => debounceFn.cancel();
-  }, [searchValue]);
+  }, [ searchValue ]);
 
   React.useEffect(() => {
     setFilteredMovies(moviesList);
-  }, [moviesList]);
+  }, [ moviesList ]);
 
   const handleModalVisibility = (state) => {
     setModalVisibility(state);
