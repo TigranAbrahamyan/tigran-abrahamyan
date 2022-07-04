@@ -1,6 +1,6 @@
-import { Button } from '../../../lib/elements/Button/Button';
-import { InputField } from '../../../lib/elements/Field/InputField';
-import { Modal } from '../../../lib/elements/Modal/Modal';
+import { Button } from '../../../lib/elements/Button';
+import { InputField } from '../../../lib/elements/Field';
+import { Modal } from '../../../lib/elements/Modal';
 
 export const MovieModal = ({
   name,

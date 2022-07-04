@@ -4,7 +4,7 @@ import { MovieSearchingAdding } from './frames/MovieSearchingAdding';
 
 import './Movies.css';
 
-export const Movies = ({
+export const MoviesComponent = ({
   searchValue,
   setSearchValue,
   name,

@@ -1,11 +1,11 @@
 import React from 'react';
 import _ from 'lodash';
 
-import { Movies } from './Movies';
-import { movies } from '../../movies';
+import { MovieContext } from '../../context';
+import { MoviesComponent } from './MoviesComponent';
 
 export const MoviesContainer = () => {
-  const [ moviesList, setMoviesList ] = React.useState(movies);
+  const { movies, setMovies } = React.useContext(MovieContext);
   const [ filteredMovies, setFilteredMovies ] = React.useState([]);
   const [ modalVisibility, setModalVisibility ] = React.useState(false);
   const [ moviesCount, setMoviesCount ] = React.useState(0);
@@ -14,25 +14,30 @@ export const MoviesContainer = () => {
   const [ name, setName ] = React.useState('');
 
   React.useEffect(() => {
-    const debounceFn = _.debounce(() => {
-      setFilteredMovies(moviesList.filter((movie) => movie.name.toLowerCase().startsWith(searchValue.toLowerCase())));
-    }, 1000);
-
+    const debounceFn = _.debounce(updateMovies, 1000);
     debounceFn();
 
     return () => debounceFn.cancel();
   }, [ searchValue ]);
 
   React.useEffect(() => {
-    setFilteredMovies(moviesList);
-    setMoviesCount(moviesList.length);
-  }, [ moviesList ]);
+    updateMovies();
+    setMoviesCount(movies.length);
+  }, [ movies ]);
+
+  const updateMovies = () => {
+    setFilteredMovies(movies.filter((movie) => movie.name.toLowerCase().includes(searchValue.toLowerCase())));
+  };
+
+  const clearInputFields = () => {
+    setSearchValue('');
+    setDescription('');
+    setName('');
+  };
 
   const handleModalVisibility = (state) => {
     setModalVisibility(state);
-    setSearchValue('');
-    setName('');
-    setDescription('');
+    clearInputFields();
   };
 
   const addMovie = () => {
@@ -40,18 +45,17 @@ export const MoviesContainer = () => {
       alert('Inputs is required');
     } else {
       const newMovie = { id: Date.now(), name, description, img: '/images/test.webp' };
-      setMoviesList([ ...moviesList, newMovie ]);
+      setMovies([ ...movies, newMovie ]);
       handleModalVisibility(false);
     }
   };
 
   const deleteMovie = (id) => {
-    setMoviesList(moviesList.filter((movie) => movie.id !== id));
-    setSearchValue('');
+    setMovies(movies.filter((movie) => movie.id !== id));
   };
 
   return (
-    <Movies
+    <MoviesComponent
       searchValue={searchValue}
       setSearchValue={setSearchValue}
       name={name}

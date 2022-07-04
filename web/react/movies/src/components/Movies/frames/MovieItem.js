@@ -1,6 +1,10 @@
-import { Button } from '../../../lib/elements/Button/Button';
+import { useNavigate } from 'react-router-dom';
 
-export const MovieItem = ({ name, description, img, deleteMovie }) => {
+import { Button } from '../../../lib/elements/Button';
+
+export const MovieItem = ({ id, name, description, img, deleteMovie }) => {
+  const navigate = useNavigate();
+
   return (
     <div>
       <img src={img} alt={name} />
@@ -8,6 +12,7 @@ export const MovieItem = ({ name, description, img, deleteMovie }) => {
         <h1>{name}</h1>
         <p>{description}</p>
         <Button onClick={deleteMovie}>Delete</Button>
+        <Button onClick={() => navigate(`/movies/${id}`)}>Go to movie</Button>
       </div>
     </div>
   );

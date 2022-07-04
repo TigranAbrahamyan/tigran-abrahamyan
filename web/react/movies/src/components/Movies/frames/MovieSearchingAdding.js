@@ -1,5 +1,5 @@
-import { Button } from '../../../lib/elements/Button/Button';
-import { InputField } from '../../../lib/elements/Field/InputField';
+import { Button } from '../../../lib/elements/Button';
+import { InputField } from '../../../lib/elements/Field';
 
 export const MovieSearchingAdding = ({ searchValue, setSearchValue, handleModalVisibility, moviesCount }) => {
   return (
