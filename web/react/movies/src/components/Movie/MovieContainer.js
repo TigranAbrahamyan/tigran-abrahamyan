@@ -14,6 +14,6 @@ export const MovieContainer = () => {
   }, []);
 
   return (
-    <MovieComponent movie={movie} />
+    <MovieComponent movie={movie ?? {}} />
   );
 }

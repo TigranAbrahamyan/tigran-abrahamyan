@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import './Navbar.css';
 
@@ -8,12 +8,16 @@ const ITEMS = [
 ];
 
 export const Navbar = () => {
+  const location = useLocation();
+
   return (
     <nav>
       <ul>
         {ITEMS.map((item) => (
           <li key={item.id}>
-            <Link to={item.path}>{item.name}</Link>
+            <Link to={item.path} className={item.path === location.pathname ? 'active' : ''}>
+              {item.name}
+            </Link>
           </li>
         ))}
       </ul>

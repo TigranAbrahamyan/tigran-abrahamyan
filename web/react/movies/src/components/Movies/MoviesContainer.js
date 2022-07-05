@@ -29,15 +29,10 @@ export const MoviesContainer = () => {
     setFilteredMovies(movies.filter((movie) => movie.name.toLowerCase().includes(searchValue.toLowerCase())));
   };
 
-  const clearInputFields = () => {
-    setSearchValue('');
-    setDescription('');
-    setName('');
-  };
-
   const handleModalVisibility = (state) => {
     setModalVisibility(state);
-    clearInputFields();
+    setDescription('');
+    setName('');
   };
 
   const addMovie = () => {
