@@ -8,3 +8,9 @@
   width: 100%;
   max-width: 800px;
 }
+
+.not-found {
+  text-align: center;
+  margin-top: 20px;
+  color: #ff0071;
+}
