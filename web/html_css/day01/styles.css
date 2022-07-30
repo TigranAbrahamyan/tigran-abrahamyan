@@ -1,0 +1,198 @@
+* {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #F1F1F1;
+}
+
+.container {
+  display: grid;
+  gap: 15px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.container > div {
+  margin: 0 20px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 10px !important;
+}
+
+.head > div > img {
+  border-radius: 50px;
+  width: 280px;
+  height: 300px;
+  box-shadow: 10px 10px 55px -25px black;
+}
+
+.head_info {
+  display: grid;
+  gap: 15px;
+}
+
+.head_info > div > a {
+  color: gray;
+  text-decoration: none;
+}
+
+.head_info__description {
+  font-style: oblique;
+  font-weight: bold;
+  color: gray;
+}
+
+.head_info__social_networks {
+  font-weight: bold;
+}
+
+.my_hobbies,
+.work_experience,
+.portfolio {
+  background-color: white;
+  border-radius: 20px;
+  padding: 25px;
+}
+
+.my_hobbies {
+  display: grid;
+  gap: 15px;
+}
+
+.my_hobbies > ol {
+  display: grid;
+  gap: 15px;
+  padding-left: 18px;
+  color: gray;
+}
+
+.work_experience {
+  display: grid;
+  gap: 15px;
+}
+
+.work_experience__info {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.work_experience__info div {
+  display: grid;
+  gap: 15px;
+}
+
+.work_experience__info div span {
+  font-weight: bold;
+}
+
+.work_experience__info div p {
+  color: gray;
+}
+
+.work_experience__info div:first-child p {
+  color: black;
+}
+
+.work_experience__info div:last-child {
+  margin-right: 70px;
+}
+
+.portfolio {
+  display: grid;
+  gap: 15px;
+}
+
+.portfolio > ol {
+  display: grid;
+  gap: 15px;
+  list-style: none;
+  padding-left: 0;
+}
+
+.portfolio > ol > li {
+  border-bottom: 1px solid #5d5c5c73;
+}
+
+.contact {
+  display: grid;
+  gap: 15px;
+}
+
+.contact h2 {
+  text-align: center;
+}
+
+.contact__form {
+  display: grid;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.contact__form__name-email {
+  display: flex;
+  gap: 15px;
+}
+
+.contact__form__name-email div {
+  width: 100%;
+}
+
+.contact__form input,
+.contact__form textarea {
+  background-color: unset;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid gray;
+  padding: 15px 0;
+  width: 100%;
+}
+
+.contact__form textarea {
+  resize: vertical;
+}
+
+.contact__form label {
+  color: gray;
+}
+
+.contact__form button {
+  color: white;
+  background-color: black;
+  border: none;
+  width: 120px;
+  padding: 15px 0;
+  margin-top: 5px;
+}
+
+.contact__form button:hover {
+  cursor: pointer;
+  background-color: gray;
+  transition: 0.3s;
+}
+
+@media (max-width: 800px) {
+  .years {
+    margin: 0;
+  }
+
+  .contact__form__name-email {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 420px) {
+  .work_experience__info {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+body {
+  height: 100vh;
+  background: #7a36a6;
+}
+
+.calculator {
+  background: #525050;
+  max-width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  gap: 20px;
+  padding: 30px;
+}
+
+.calculator > #output {
+  width: 100%;
+  height: 30px;
+  padding-top: 5px;
+  text-align: center;
+  background: white;
+}
+
+.calculator > .inputs {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.calculator > .inputs > input {
+  width: 100%;
+}
+
+.calculator > .inputs > #operator {
+  color: #fff;
+}
+
+.calculator > .buttons {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.calculator > .buttons > button {
+  width: calc(100% / 4);
+  height: 30px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.calculator > #reset {
+  width: 100%;
+  height: 30px;
+  cursor: pointer;
+}

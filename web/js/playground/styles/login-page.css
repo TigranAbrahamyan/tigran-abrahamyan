@@ -1,0 +1,19 @@
+.login-page {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.playground-text {
+  font-weight: 600;
+  font-size: 75px;
+  color: rgba(21, 37, 54, 0.8);
+  text-align: center;
+}
+
+.login-page input,
+.login-page button {
+  height: 50px;
+  font-size: 22px;
+}

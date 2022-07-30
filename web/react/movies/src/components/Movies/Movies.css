@@ -1,0 +1,42 @@
+.movies {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 32px;
+  gap: 32px;
+}
+
+.movies__searching-adding {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 600px;
+}
+
+.movies__items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.movies__items > div {
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 4px 4px 17px -5px rgba(0,0,0,0.7);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.movies__items__content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.movies__items img {
+  width: 100%;
+  height: 400px;
+}
